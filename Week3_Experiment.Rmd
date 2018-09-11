@@ -455,3 +455,7 @@ myTexts
 #i was wrong
 ```
 
+```{r}
+gutenberg_metadata %>% filter(author == "Carroll, Lewis")
+```
+
