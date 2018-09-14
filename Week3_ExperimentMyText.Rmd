@@ -11,6 +11,12 @@ Initially I thought to do some exploring through code since it seemed more effic
 ```{r}
 library(gutenbergr)
 library(dplyr)
+library(tidytext)
+library(tidyr)
+library(scales)
+```
+This chunk (below) is just to show where the information is downloaded. Once I figure out how to search the dataframe, you all are doomed. 
+```{r}
 gutenberg_metadata
 ```
 
@@ -24,13 +30,13 @@ I still haven't gotten use to calling the functions in R so I looked through the
 gutenberg_download(730, mirror = "http://gutenberg.pglaf.org/")
 #i was wrong
 ```
-This chunk (below) lists the works under each author and stores it into the respective variale 
+This chunk (below) lists the works under each author and stores it into the respective variable 
 ```{r}
 lewis <- gutenberg_metadata %>% filter(author == "Caroll, Lewis")
 baum <- gutenberg_metadata %>% filter(author == "Baum, L. Frank (Lyman Frank)")
 milne <- gutenberg_metadata %>% filter(author == "Milne, A. A. (Alan Alexander)")
 ```
-
+This chunk (below) adds the texts from each author into their respective variable
 ```{r}
 carroll <- gutenberg_works(author == "Carroll, Lewis") %>%
   gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
@@ -38,5 +44,31 @@ baum <- gutenberg_works(author == "Baum, L. Frank (Lyman Frank)") %>%
   gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
 milne <- gutenberg_works(author == "Milne, A. A. (Alan Alexander)") %>%
   gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
+```
+If you've noticed, I had to specify a mirror for each of the gutenberg_download() functions because the current default is not any specific mirror and I have yet to figure out how to set the default. 
+
+Let me list (here) each process that needs to be done for the individual corpus
+1. unnest_tokens(): make text into list of words
+2. Tidy the works (perhaps before we unnest)
+    - but this might just be for that specific library janeaustenr
+3. data(stop_words), anti_join(stop_words): removes stop words from list 
+4. count(word, sort = TRUE) : count words to store in list
+5. plot count (one corpus)
+6. Repeat 1-5 for the other two corpus
+7. check plots for the other corpus and customize stop words (if needed)
+8. ggplot() to compare alignment in word frequency
+9. 2 correlation tests
+
+Including stop words
+1. unnest tokens
+2. count words
+3. combine book-words and total words in a df
+4. map word freq by plotting n/total by count
+5. calculate freq by rank (rank = rownumber, term_freq = n/total)
+6. plot freq by rank
+    - 
+
+```{r}
+
 ```
 
