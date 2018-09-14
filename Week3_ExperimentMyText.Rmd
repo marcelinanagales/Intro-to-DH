@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+### Trying it on my own texts
+
+
+Initially I thought to do some exploring through code since it seemed more efficient than searching through the meta-data myself
+
+```{r}
+library(gutenbergr)
+library(dplyr)
+gutenberg_metadata
+```
+
+I still haven't gotten use to calling the functions in R so I looked through the variable  and clicked on it within the top right corner of R Studio and looked through that way. I'll list the steps down so that I can come back and see if I can replicate this in code.
+
+1. Search for Lewis Carroll texts, find author ID (7)
+2. Search for Frank L. Baum texts, find author ID (42)
+3. Search for A. A. Milne texts, find author ID (730)
+```{r}
+# I was hoping this line just downloaded the texts corresponding to the specific author IDs
+gutenberg_download(730, mirror = "http://gutenberg.pglaf.org/")
+#i was wrong
+```
+This chunk (below) lists the works under each author and stores it into the respective variale 
+```{r}
+lewis <- gutenberg_metadata %>% filter(author == "Caroll, Lewis")
+baum <- gutenberg_metadata %>% filter(author == "Baum, L. Frank (Lyman Frank)")
+milne <- gutenberg_metadata %>% filter(author == "Milne, A. A. (Alan Alexander)")
+```
+
+```{r}
+carroll <- gutenberg_works(author == "Carroll, Lewis") %>%
+  gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
+baum <- gutenberg_works(author == "Baum, L. Frank (Lyman Frank)") %>%
+  gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
+milne <- gutenberg_works(author == "Milne, A. A. (Alan Alexander)") %>%
+  gutenberg_download(meta_fields = "title", mirror = "http://gutenberg.pglaf.org/")
+```
+

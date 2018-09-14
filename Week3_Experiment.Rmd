@@ -153,7 +153,7 @@ Upload certain texts into hgwells, multiple books. Specifically picked using the
 ```{r}
 library(gutenbergr)
 
-hgwells <- gutenberg_download(c(35, 36, 5230, 159))
+hgwells <- gutenberg_download(c(35, 36, 5230, 159), mirror ="http://gutenberg.pglaf.org/" )
 ```
 I printed out the variable to see exactly what the download function did
 ```{r}
@@ -177,7 +177,7 @@ Note: look up the arguments of count() : are there more besides sort
 
 ```{r}
 # works of the bronte sisters 
-bronte <- gutenberg_download(c(1260, 768, 969, 9182, 767))
+bronte <- gutenberg_download(c(1260, 768, 969, 9182, 767), mirror = "http://gutenberg.pglaf.org/")
 ```
 No need to print bronte since it will be a similar layout to hgwells
 
@@ -353,7 +353,7 @@ book_words %>%
 
 ```{r}
 physics <- gutenberg_download(c(37729, 14725, 13476, 5001), 
-                              meta_fields = "author")
+                              meta_fields = "author", mirror = "http://gutenberg.pglaf.org/")
 ```
 
 ah new argument! meta_fields within gutenberg_download()
@@ -432,30 +432,3 @@ ggplot(plot_physics, aes(word, tf_idf, fill = author)) +
   facet_wrap(~author, ncol = 2, scales = "free") +
   coord_flip()
 ```
-
-### Trying it on my own texts
-
-
-Initially I thought to do some exploring through code since it seemed more efficient than searching through the meta-data myself
-
-```{r}
-gutenberg_metadata
-```
-
-I still haven't gotten use to calling the functions in R so I looked through the variable  and clicked on it within the top right corner of R Studio and looked through that way. I'll list the steps down so that I can come back and see if I can replicate this in code.
-
-1. Search for Lewis Carroll texts, find author ID (7)
-2. Search for Frank L. Baum texts, find author ID (42)
-3. Search for A. A. Milne texts, find author ID (730)
-```{r}
-# I was hoping this line just downloaded the texts corresponding to the specific author IDs
-myTexts <- gutenberg_download(c(7, 42, 730), 
-                              meta_fields = "author")
-myTexts
-#i was wrong
-```
-
-```{r}
-gutenberg_metadata %>% filter(author == "Carroll, Lewis")
-```
-
