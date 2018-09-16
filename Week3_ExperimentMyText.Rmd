@@ -59,15 +59,23 @@ Let me list (here) each process that needs to be done for the individual corpus
 8. ggplot() to compare alignment in word frequency
 9. 2 correlation tests
 
-Including stop words
+Including stop words (one corpus)
 1. unnest tokens
 2. count words
 3. combine book-words and total words in a df
 4. map word freq by plotting n/total by count
 5. calculate freq by rank (rank = rownumber, term_freq = n/total)
 6. plot freq by rank
-    - 
+    - best fit line
+7. bind_tf_idf(word, book, n) <-calculates t, idf, and tf-idf
+    - remove total word column and descending values of tf-idf
+8. plot word vs tf_idf and separate by text 
 
+Multiple Corpus
+1. bind_tf_idf() for multiple corpus
+2. plot word vs tf_idf (separately plotted by author)
+3. customize stop_words by searching lines with the top words that are weird
+4. re-plot word vs tf_idf (separately plotted by author)
 ```{r}
 
 ```
