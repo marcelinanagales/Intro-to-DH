@@ -1,0 +1,175 @@
+---
+title: "Week 3: Experiments - Elaborations"
+output: html_notebook
+---
+
+## Objectives and Output
+
+For more on how to manipulate tidy texts and dataframes: R for Data Science, chapter 5: http://r4ds.had.co.nz/ (Links to an external site.)
+
+For an introduction to R programming: The Art of R Programming, chapters 1 and 2: https://ebookcentral.proquest.com/lib/fsu/detail.action?docID=1137514
+
+
+## R for Data Science
+
+### Chapter 5: Data Transformation
+
+#### 5.1 Introduction
+
+how to transform your data using the dplyr package (and a new dataset on flights)
+
+##### 5.1.1 Prerequisites
+At this point, I was having trouble installing the tidyverse package. so I had to update my R version 
+
+To do so, I went http://mercury.webster.edu/aleshunas/R_learning_infrastructure/Updating%20R%20and%20RStudio.html for update instructions. 
+
+*R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"*
+^ This is my current version. As you can see, it was released around 2015. The current version available is R version 3.5.1 (Feather Spray) released 2018-07-02.
+
+So even thoughI tried to install a new R package, it seems that the packages dpylr and tidytext provide the same function.
+```{r}
+library(nycflights13)
+#library(tidyverse)
+library(tidytext)
+library(dplyr)
+```
+
+(Conflicting function calls)
+If you want to use the base version of these functions after loading dplyr, you’ll need to use their full names: stats::filter() and stats::lag().
+
+##### 5.1.2 nycflights13
+
+```{r}
+flights
+```
+
+##### 5.1.3 dplyr basics
+
+filter()
+arrange()
+select()
+mutate()
+summarize()
+
+group_by()
+
+#### 5.2 filter rows with filter()
+
+```{r}
+filter(flights, month == 1, day == 1)
+```
+
+
+```{r}
+jan1 <- filter(flights, month == 1, day == 1)
+```
+
+
+```{r}
+(dec25 <- filter(flights, month == 12, day == 25))
+```
+
+##### 5.2.1 Comparisons
+```{r}
+sqrt(2) ^ 2 == 2
+1 / 49 * 49 == 1
+```
+
+
+```{r}
+near(sqrt(2) ^ 2,  2)
+near(1 / 49 * 49, 1)
+```
+
+##### 5.2.2 Logical Operators
+```{r}
+filter(flights, month == 11 | month == 12)
+```
+
+```{r}
+nov_dec <- filter(flights, month %in% c(11, 12))
+```
+
+```{r}
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+```
+
+##### 5.2.3 Missing Values
+
+```{r}
+NA > 5
+10 == NA
+NA + 10
+NA / 2
+```
+
+```{r}
+NA == NA
+```
+
+```{r}
+# Let x be Mary's age. We don't know how old she is.
+x <- NA
+
+# Let y be John's age. We don't know how old he is.
+y <- NA
+
+# Are John and Mary the same age?
+x == y
+```
+
+```{r}
+is.na(x)
+```
+
+```{r}
+df <- tibble(x = c(1, NA, 3))
+filter(df, x > 1)
+
+filter(df, is.na(x) | x > 1)
+```
+
+##### 5.2.4 Exercises
+Find all flights
+```{r}
+# Had an arrival delay of two or more hours
+arrDelay2 <- filter(flights, arr_delay >= 2)
+```
+
+```{r}
+# Flew to Houston (IAH or HOU)
+filter(flights, dest == "IAH"| dest == "HOU")
+```
+
+```{r}
+# Were operated by United, American, or Delta
+filter(flights, carrier %in% c("UA", "AA", "DL"))
+```
+
+```{r}
+# Departed in summer (July, August, and September)
+filter(flights, month %in% c(7, 8, 9))
+```
+
+```{r}
+# Arrived more than two hours late, but didn’t leave late
+
+# Were delayed by at least an hour, but made up over 30 minutes in flight
+# Departed between midnight and 6am (inclusive)
+
+```
+
+Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+
+How many flights have a missing dep_time? What other variables are missing? What might these rows represent?
+
+Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
+
+
+## The Art of R Programming, chapters 1 and 2
+
+### Ch 1: 
+
+### Ch 2: 
+
