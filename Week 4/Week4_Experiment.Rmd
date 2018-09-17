@@ -167,9 +167,10 @@ How many flights have a missing dep_time? What other variables are missing? What
 Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
 
 
-## The Art of R Programming, chapters 1 and 2
+## Text Mining with R
 
-### Ch 1: 
+### Ch 2: Sentient Analysis with tidy Data
 
-### Ch 2: 
+### Ch 3: Analyzing word and document frequency: tf-idf
 
+Examples from this chapter were already done in the previous homework assignment
