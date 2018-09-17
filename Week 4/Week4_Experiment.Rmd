@@ -154,8 +154,16 @@ filter(flights, month %in% c(7, 8, 9))
 
 ```{r}
 # Arrived more than two hours late, but didn’t leave late
+filter(flights, arr_delay > 2 & dep_delay <= 0)
+```
 
+```{r}
 # Were delayed by at least an hour, but made up over 30 minutes in flight
+
+```
+
+
+```{r}
 # Departed between midnight and 6am (inclusive)
 
 ```
