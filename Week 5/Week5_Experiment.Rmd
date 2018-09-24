@@ -1,0 +1,56 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(quanteda)
+```
+
+```{r}
+my_corpus <- corpus(data_char_ukimmig2010)
+summary(my_corpus)
+```
+
+```{r}
+docvars(my_corpus, "Party") <- names(data_char_ukimmig2010)
+docvars(my_corpus, "Year") <- 2010
+summary(my_corpus)
+```
+
+```{r}
+# text file
+mytf3 <- readtext("~/Dropbox/QUANTESS/corpora/project_gutenberg/pg2701.txt", cache = FALSE)
+summary(corpus(mytf3), 5)
+```
+
+```{r}
+# multiple text files
+mytf4 <- readtext("~/Dropbox/QUANTESS/corpora/inaugural/*.txt", cache = FALSE)
+summary(corpus(mytf4), 5)
+```
+
+```{r}
+# multiple text files with docvars from filenames
+mytf5 <- readtext("~/Dropbox/QUANTESS/corpora/inaugural/*.txt", 
+                  docvarsfrom = "filenames", sep = "-", docvarnames = c("Year", "President"))
+summary(corpus(mytf5), 5)
+```
+
+```{r}
+# XML data
+mytf6 <- readtext("~/Dropbox/QUANTESS/quanteda_working_files/xmlData/plant_catalog.xml", 
+                  textfield = "COMMON")
+summary(corpus(mytf6), 5)
+```
+
+```{r}
+# csv file
+write.csv(data.frame(inaugSpeech = texts(data_corpus_inaugural), 
+                     docvars(data_corpus_inaugural)),
+          file = "/tmp/inaug_texts.csv", row.names = FALSE)
+mytf7 <- readtext("/tmp/inaug_texts.csv", textfield = "inaugSpeech")
+summary(corpus(mytf7), 5)
+```
+
