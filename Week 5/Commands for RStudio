@@ -1,7 +1,6 @@
 Install from Terminal for RStudio
 
   508  sudo apt-get install libxml2-dev
-  509  sudo apt-get install libpopper-cpp-dev
   510  sudo apt-get install libpoppler-cpp-dev
   511  sudo apt-get install libcurl4-openssl-dev
   512  sudo apt-get install libssl-dev
