@@ -67,29 +67,38 @@ Let me list (here) each process that needs to be done for the individual corpus
 
 ```{r}
 # unnest_tokens(): make text into list of words
-carroll %>%
+lewis_books <- carroll %>%
   group_by(title) %>%
   mutate(linenumber = row_number(),
          chapter = cumsum(str_detect(text, regex("^chapter [\\divxlc]",
-                                                 ignore_case = TRUE)))) %>%
-  ungroup()
+                                                 ignore_case = TRUE)))) %>%   ungroup()
+```
 
-carrolltxts <- carroll %>%
+```{r}
+carrolltxts <- lewis_books %>%
   unnest_tokens(word, text)
 ```
-2. Tidy the works (perhaps before we unnest)
+2. _Tidy the works (perhaps before we unnest)_
      - but this might just be for that specific library janeaustenr
 This sounds simpler than it seems, since it really takes more work (janeausten package had it easy)
-2.1 Check how much of the title page needs to go (all of it, none of it, etc)
+2.1 Check how much of the title page needs to go (all of it, none of it, etc) 
 2.2 are chapter titles still included or is it something that needs to be removed. Also how do we remove this without removing a mention of chapter within the novel that is pertinent to the text. 
 ```{r}
 # data(stop_words), anti_join(stop_words): removes stop words from list 
 data(stop_words)
 
-carroll_tidy <- carroll %>%
+carroll_tidy <- carrolltxts %>%
   anti_join(stop_words)
 ```
+```{r}
 # count(word, sort = TRUE) : count words to store in list
+carroll_tidy %>%
+  count(word, sort = TRUE)
+
+```
+
+
+```{r}
 # plot count (one corpus)
 ```
 
