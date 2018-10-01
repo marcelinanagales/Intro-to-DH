@@ -1,0 +1,71 @@
+---
+title: "Quanteda Tutorials"
+output: html_notebook
+---
+
+# Ch 1. Introduction
+
+## Install packages
+- All packages originally listed in the Week5_Experiment.Rmd (these have already been installed)
+
+## R Commands
+
+# Ch 2. Data Import
+
+## Pre-Formatted Files
+
+## Multiple Text files
+
+## Different Encodings
+
+# Ch 3. Basic Operations
+
+## Workflow
+
+## Corpus
+
+### Construct a corpus
+
+### Subset corpus
+
+### Change units of texts
+
+### Extract tags from texts
+
+## Tokens
+
+### Construct a tokens object
+
+### Keywords in contexts
+
+### Select toekns
+
+### Compound Tokens
+
+### Look Up dictionaries
+
+### Generate n-grams
+
+## Document-feature matrix
+
+### Construct a DFM
+
+### Select Features
+
+### Group Documents
+
+## Feature co-occurence matrix
+
+### Construct a FCM
+
+# Ch 4. Statistical Analysis
+
+## Simple Frequency Analysis
+
+### Lexical diversity
+
+### Document/Feature similarity
+
+### Relative frequency analysis (jeyness)
+
+### Collocation Analysis
