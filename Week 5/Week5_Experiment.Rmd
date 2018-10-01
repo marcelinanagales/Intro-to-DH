@@ -1,25 +1,50 @@
 ---
-title: "R Notebook"
+title: "Week 5: Experiments"
 output: html_notebook
 ---
 
+# Quanteda QuickStart
+
+## Installing the Package(s)
 Installed necessary packages within the terminal 
 - quanteda
-- 
+- readtext
+- spacyr
+- quanteda.corpora
+- quanteda.dictionaries
+
+## Creating a Corpus
 ```{r}
 library(quanteda)
 ```
 
+### Building a corpus from a character vector
 ```{r}
 my_corpus <- corpus(data_char_ukimmig2010)
 summary(my_corpus)
 ```
-
+docsvars - document level variables using names() from rbase
 ```{r}
 docvars(my_corpus, "Party") <- names(data_char_ukimmig2010)
 docvars(my_corpus, "Year") <- 2010
 summary(my_corpus)
 ```
+
+Additional metadata that we do not consider a document variable or interest for analysis (_language, _docsource)
+```{r}
+metadoc(my_corpus, "language") <- "english"
+metadoc(my_corpus, "docsource")  <- paste("data_char_ukimmig2010", 1:ndoc(my_corpus), sep = "_")
+summary(my_corpus, showmeta = TRUE)
+```
+metadoc() - define your own document meta-data fields
+ndoc() - number of documentes in the corpus
+
+Additional commands/functions 
+- ncols()
+- nrows()
+
+### Loading in files using the readtext package
+
 Starting from here, the following commands will not run because I don't have these files in these specific folders
 ```{r}
 require(readtext)
@@ -59,6 +84,9 @@ summary(corpus(mytf7), 5)
 ```
 Ending here on the code that does not work on account of non existent files of non existent directories
 
+### How a quanteda corpus works
+
+#### Corpus principles
 ```{r}
 texts(data_corpus_inaugural)[2]
 ```
@@ -66,7 +94,7 @@ texts(data_corpus_inaugural)[2]
 ```{r}
 summary(data_corpus_irishbudget2010)
 ```
-
+Save output from summary comand as a dataframe and plot statistics 
 ```{r}
 tokenInfo <- summary(data_corpus_inaugural)
 if(require(ggplot2))
@@ -76,7 +104,7 @@ if(require(ggplot2))
 ```{r}
 tokenInfo[which.max(tokenInfo$Tokens), ]
 ```
-
+### Tools for Handling Corpus Objects
 ```{r}
 my_corpus1 <- corpus(data_corpus_inaugural[1:5])
 my_corpus2 <- corpus(data_corpus_inaugural[53:58])
@@ -85,4 +113,28 @@ my_corpus3 <- my_corpus1 + my_corpus2
 summary(my_corpus3)
 
 ```
+
+#### Subsetting corpus objects
+
+### Exploring Corpus Texts
+
+## Extracting Features from a Corpus
+
+### Tokenizing texts
+
+### Constructing a document-feature matrix
+
+#### Viewing the document-feature matrix
+
+#### Grouping documents by document variable
+
+#### Grouping words by dictionary or equivalence class
+
+## Further Examples
+
+### Similarities between texts
+
+### Scaling Document Positions
+
+### Topic Models
 
