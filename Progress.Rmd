@@ -1,0 +1,26 @@
+---
+title: "Progress"
+author: "Marcelina Nagales"
+date: "October 2, 2018"
+output: html_document
+---
+
+## October 2, 2018
+
+Initial progress is slow. I have something for each week (although some weeks are more developed than others). Currently working on Week 3 my texts
+- Lewis Carroll texts
+
+Done:
+1. unnest_tokens(): make text into list of words
+2. Tidy the works (perhaps before we unnest)
+    - but this might just be for that specific library janeaustenr
+3. data(stop_words), anti_join(stop_words): removes stop words from list 
+4. count(word, sort = TRUE) : count words to store in list
+
+Currently:
+Count looks off, need to clean up (add custom stop_words)
+Thinking about removing the math papers by Carroll
+Also thinking about removing all chapter titles (?)
+- will this effect the word frequency greatly?
+
+
