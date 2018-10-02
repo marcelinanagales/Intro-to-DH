@@ -1,0 +1,40 @@
+---
+title: "Week 7 In Class"
+output: html_notebook
+---
+
+Goals to Cover:
+- Simplify
+- Visibility / Black Box
+- Things don't work
+- Naming Things
+
+Variance of both classification and modeling
+- what good is all that?
+- Natural language processing 
+
+Bayesian
+- putting texts in categories (prediction -esc)
+Topic Modeling - features of text
+- find groups of related documents
+- relationships amongst words
+
+Past surface Linguistics
+
+require() - does not reload the library if it has already been 
+
+```{r}
+require(quanteda)
+require(quanteda.corpora)
+require(caret)
+```
+
+## Native Bayesian
+Step 1: Get Data into a corpus
+```{r}
+corp <- data_corpus_movies
+summary(corp, 5)
+```
+
+topfeatures(training_dfm) - dfm specific function/command etc
+textmodel_nb() - naive bayesian
