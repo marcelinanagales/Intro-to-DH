@@ -115,6 +115,13 @@ summary(my_corpus3)
 ```
 
 #### Subsetting corpus objects
+```{r}
+summary(corpus_subset(data_corpus_inaugural, Year > 1990))
+```
+
+```{r}
+summary(corpus_subset(data_corpus_inaugural, President == "Adams"))
+```
 
 ### Exploring Corpus Texts
 
