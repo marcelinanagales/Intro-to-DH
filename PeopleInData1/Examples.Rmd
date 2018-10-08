@@ -1,0 +1,39 @@
+---
+title: "People In Data 1: Experiments - Examples"
+output: html_notebook
+---
+
+```{r}
+require(quanteda)
+require(quanteda.corpora)
+require(lubridate)
+require(ggplot2)
+```
+
+
+## Quanteda Tutorials: Document/Feature Similarity
+
+```{r}
+inaug_toks <- tokens(data_corpus_inaugural)
+inaug_dfm <- dfm(inaug_toks, remove = stopwords('en'))
+dist <- textstat_dist(inaug_dfm)
+clust <- hclust(dist)
+plot(clust, xlab = "Distance", ylab = NULL)
+```
+
+## Quanteda Tutorials: Relative Frequency Analysis (Keyness)
+
+```{r}
+news_corp <- download('data_corpus_guardian')
+```
+
+```{r}
+news_toks <- tokens(news_corp, remove_punct = TRUE) 
+news_dfm <- dfm(news_toks)
+ 
+key <- textstat_keyness(news_dfm, year(docvars(news_dfm, 'date')) >= 2016)
+attr(key, 'documents') <- c('2016', '2012-2015')
+
+textplot_keyness(key)
+```
+
