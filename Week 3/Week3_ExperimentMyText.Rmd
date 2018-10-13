@@ -103,7 +103,7 @@ lewis_books %>%
   select(text)
 ```
 
-
+From here it seems to be evident that I need to remove the math texts. 
 
 ```{r}
 # plot count (one corpus)
