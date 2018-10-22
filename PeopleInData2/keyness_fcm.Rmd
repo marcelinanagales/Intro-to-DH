@@ -1,0 +1,89 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Load some libraries
+```{r}
+# add comment
+require(quanteda)  #add coment
+require(quanteda.corpora)
+require(lubridate)
+require(ggplot2)
+```
+
+## Load the corpus
+```{r}
+#from quanteda.corpora
+# input: RDS file as a character vector (R data file)
+
+# save corpus into news_corp from quanteda.corpora
+
+news_corp <- download('data_corpus_guardian')
+```
+Note: look into saveRDS and readRDS for saving corpus for ease of use
+
+## Calculate some stuff
+```{r}
+# from quanteda
+# input: variable, (optional) remove_punct // removes punctuation: yes
+# tokenizes text ( breaks it up into words, grouped by specified text )
+news_toks <- tokens(news_corp, remove_punct = TRUE) 
+# from quanteda
+# input: corpus variable
+# Construct a sparse document-feature matrix, from a character, corpus, tokens, or even other dfm object.
+news_dfm <- dfm(news_toks)
+# from quanteda
+# input: corpus variable
+# additional conditions within this specific function call:
+#     if year in "date" is greater than or equal to 2016
+key <- textstat_keyness(news_dfm, year(docvars(news_dfm, 'date')) >= 2016)
+```
+
+
+```{r}
+# i dont know what this line does (no change in key variable)
+attr(key, 'documents') <- c('2016', '2012-2015')
+``` 
+
+## Look at the results
+```{r}
+# plots keyness saved in the variable key
+textplot_keyness(key)
+```
+
+## Part 2: Create a Feature Co-occurance matrix
+```{r}
+news_dfm_2 <- dfm(news_corp, remove = stopwords('en'), remove_punct = TRUE)
+news_dfm_2 <- dfm_remove(news_dfm_2, c('*-time', 'updated-*', 'gmt', 'bst'))
+news_dfm_2 <- dfm_trim(news_dfm_2, min_termfreq = 100)
+
+topfeatures(news_dfm)
+```
+
+## Confirm that it has less features than the full corpus
+```{r}
+nfeat(news_dfm)
+nfeat(news_dfm_2)
+```
+
+## Convert to a FCM
+```{r}
+news_fcm <- fcm(news_dfm_2)
+dim(news_fcm)
+
+```
+
+## Reduce the number of features that you graph
+```{r}
+feat <- names(topfeatures(news_fcm, 50))
+news_fcm <- fcm_select(news_fcm, feat)
+dim(news_fcm)
+```
+
+## Look at the results
+```{r}
+size <- log(colSums(dfm_select(news_dfm_2, feat)))
+textplot_network(news_fcm, min_freq = 0.8, vertex_size = size / max(size) * 3)
+```
+
