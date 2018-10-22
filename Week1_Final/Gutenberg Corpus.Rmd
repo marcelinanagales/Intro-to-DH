@@ -1,0 +1,145 @@
+---
+title: "Gutenberg Corpus"
+output: html_notebook
+---
+
+A clean start to get my corpus up and running (saves corpora into rds files)
+
+```{r}
+# This is to group all libraries for import (a style found in most programming languages)
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+library(tidyr)
+library(stringr)
+library(scales)
+```
+
+```{r}
+# this filters out from gutenberg_metadata ( )
+gutenberg_metadata %>% filter(author == "Carroll, Lewis", str_detect(gutenberg_bookshelf, "Children's Literature"), language == "en",  has_text, !str_detect(title, "facsimile")) %>% distinct(title)
+```
+
+Note to self: gutenberg_download(meta_fields = "title", "author") will not run. gutenberg_download(meta_fields = c("title", "author")) will run. 
+ 
+```{r}
+carroll <- gutenberg_works(author == "Carroll, Lewis", str_detect(gutenberg_bookshelf, "Children's Literature"), !str_detect(title, "facsimile")) %>%
+  gutenberg_download(meta_fields = c("title", "author"))
+```
+
+carroll contains actual text of the 3 books that I want from Lewis Carroll - Alice in Wonderland, Through the Looking Glass, and The Hunting of the Snark: An Agony in Eight Fits. These are all childrens literature and not an analysis of texts (which Is why I decided to exclude the "facsimile" piece bt Lewis Carroll) - the titles of the books in carroll are listed under lewis1 just to make sure I got the right books
+
+```{r}
+gutenberg_metadata %>% filter(author == "Baum, L. Frank (Lyman Frank)", str_detect(gutenberg_bookshelf, "Children's Literature"), language == "en",  has_text) %>% distinct(title)
+```
+
+```{r}
+frank <- gutenberg_works(author == "Baum, L. Frank (Lyman Frank)", str_detect(gutenberg_bookshelf, "Children's Literature")) %>%
+  gutenberg_download(meta_fields = c("title", "author"))
+```
+
+Could not download Little Wizard Stories of Oz (which is ok)
+
+```{r}
+gutenberg_metadata %>% filter(author == "Milne, A. A. (Alan Alexander)", str_detect(gutenberg_bookshelf, "Detective Fiction"), language == "en",  has_text) %>% distinct(title)
+```
+
+```{r}
+alanalexander <- gutenberg_works(author == "Milne, A. A. (Alan Alexander)", str_detect(gutenberg_bookshelf, "Detective Fiction")) %>%
+  gutenberg_download(meta_fields = c("title", "author"))
+```
+
+This only has one work: The Red House Mystery. I felt it as a nice addition to still include AA Milne even though Winnie The Pooh remains unavailable on gutenberg
+
+```{r}
+gutenberg_metadata %>% filter(author == "Doyle, Arthur Conan", str_detect(gutenberg_bookshelf, "Detective Fiction"), language == "en",  has_text) %>% distinct(title)
+```
+
+```{r}
+arthur <- gutenberg_works(author == "Doyle, Arthur Conan", str_detect(gutenberg_bookshelf, "Detective Fiction")) %>%
+  gutenberg_download(meta_fields = c("title", "author"))
+```
+
+Finally, 4 corpora that have only detective fiction and children's literature
+Now to simplify them into 2 corpus (one of Children's Literature and the other of Detective Fiction)
+
+```{r}
+childrensLit <- bind_rows(carroll, frank)
+detectiveFiction <- bind_rows(arthur, alanalexander)
+```
+
+```{r}
+# to check and see if page numbers and chapter numbers would interfere with the word frequency count for childrens lit corpus (they will)
+
+test <- childrensLit %>% filter(str_detect(text, regex("[0-9]"))) %>% select(text)
+```
+ I messed with the interior but basically it includes chapter headings and  
+```{r}
+# Adds the number of words in each str vector 
+test$charcount = str_count(test$text, "\\S+")
+```
+
+```{r}
+# all of the numbers (without chapter titles?)
+
+# i found that the most amount of words for in text numbers is around 10 or more words 
+dat1 <- filter(test, charcount < 10 && !str_detect(text, regex("chapter", ignore_case = )))
+```
+
+```{r}
+# lets take out the numbers
+childsLit_clean <- childrensLit[!childrensLit$text %in% dat1$text, , drop = FALSE]
+```
+
+```{r}
+# seeing chapter names in the cleaned corpus
+filter(childsLit_clean, str_detect(text, regex("^chapter ", ignore_case = TRUE)))
+```
+
+
+```{r}
+# to check and see if page numbers and chapter numbers would interfere with the word frequency count for detective fiction corpus (they will not)
+detectiveFiction %>% filter(str_detect(text, regex("[0-9]"))) %>% select(text)
+```
+
+
+```{r}
+# This is to set chapter numbers next to the text
+child_books <- childrensLit %>%
+  group_by(title) %>%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(text, regex("^chapter [\\divxlc]", ignore_case = TRUE)))) %>%   ungroup()
+```
+
+```{r}
+detective_books <- detectiveFiction %>%
+  group_by(title) %>%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(text, regex("^chapter [\\divxlc]", ignore_case = TRUE)))) %>%   ungroup()
+```
+
+Some texts do not have a mention of chapters and should be adjusted accordingly
+
+```{r}
+# upload all words in detective corpus except for the stop_words
+tidy_detective <- detective_books %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+```
+
+
+```{r}
+# upload all words in childrens lit corpus except for the stop_words
+tidy_childrensLit <- child_books %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+```
+
+
+```{r}
+# saves corpus without unnesting tokens
+
+saveRDS(detective_books, "detective.rds")
+saveRDS(child_books, "childrenLit.rds")
+```
+
