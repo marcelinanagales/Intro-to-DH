@@ -1,0 +1,36 @@
+---
+title: "NLP Notebook"
+output: html_notebook
+---
+
+# Natural Language Processing
+
+### Installing the Necessary Libraries
+
+```{r}
+library(NLP)
+library(openNLP)
+library(RWeka)
+library(rJava)
+library(magrittr)
+```
+
+
+I was warned it would get angry
+
+## Basic Tokenization
+
+```{r}
+# made the folder path within the homework folder
+bio <- readLines("data/nlp/anb-jarena-lee.txt")
+print(bio)
+```
+
+```{r}
+bio <- paste(bio, collapse = " ")
+print(bio)
+```
+
+```{r}
+bio <- as.String(bio)
+```
