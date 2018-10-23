@@ -182,20 +182,11 @@ $(document).ready(function () {
 <h3>Installing the Necessary Libraries</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShOTFApXG5saWJyYXJ5KG9wZW5OTFApXG5saWJyYXJ5KFJXZWthKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShOTFApXG5saWJyYXJ5KG9wZW5OTFApXG5saWJyYXJ5KFJXZWthKVxubGlicmFyeShySmF2YSlcbmxpYnJhcnkobWFncml0dHIpXG5gYGAifQ== -->
 <pre class="r"><code>library(NLP)
 library(openNLP)
-library(RWeka)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV0FSTklORzogQW4gaWxsZWdhbCByZWZsZWN0aXZlIGFjY2VzcyBvcGVyYXRpb24gaGFzIG9jY3VycmVkXG5XQVJOSU5HOiBJbGxlZ2FsIHJlZmxlY3RpdmUgYWNjZXNzIGJ5IHdla2EuY29yZS5XZWthUGFja2FnZUNsYXNzTG9hZGVyTWFuYWdlciAoZmlsZTovaG9tZS9jZWxpbmUvUi94ODZfNjQtcGMtbGludXgtZ251LWxpYnJhcnkvMy40L1JXZWthamFycy9qYXZhL3dla2EuamFyKSB0byBtZXRob2QgamF2YS5sYW5nLkNsYXNzTG9hZGVyLmRlZmluZUNsYXNzKGphdmEubGFuZy5TdHJpbmcsYnl0ZVtdLGludCxpbnQsamF2YS5zZWN1cml0eS5Qcm90ZWN0aW9uRG9tYWluKVxuV0FSTklORzogUGxlYXNlIGNvbnNpZGVyIHJlcG9ydGluZyB0aGlzIHRvIHRoZSBtYWludGFpbmVycyBvZiB3ZWthLmNvcmUuV2VrYVBhY2thZ2VDbGFzc0xvYWRlck1hbmFnZXJcbldBUk5JTkc6IFVzZSAtLWlsbGVnYWwtYWNjZXNzPXdhcm4gdG8gZW5hYmxlIHdhcm5pbmdzIG9mIGZ1cnRoZXIgaWxsZWdhbCByZWZsZWN0aXZlIGFjY2VzcyBvcGVyYXRpb25zXG5XQVJOSU5HOiBBbGwgaWxsZWdhbCBhY2Nlc3Mgb3BlcmF0aW9ucyB3aWxsIGJlIGRlbmllZCBpbiBhIGZ1dHVyZSByZWxlYXNlXG4ifQ== -->
-<pre><code>WARNING: An illegal reflective access operation has occurred
-WARNING: Illegal reflective access by weka.core.WekaPackageClassLoaderManager (file:/home/celine/R/x86_64-pc-linux-gnu-library/3.4/RWekajars/java/weka.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
-WARNING: Please consider reporting this to the maintainers of weka.core.WekaPackageClassLoaderManager
-WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
-WARNING: All illegal access operations will be denied in a future release</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShySmF2YSlcbmxpYnJhcnkobWFncml0dHIpXG5gYGAifQ== -->
-<pre class="r"><code>library(rJava)
+library(RWeka)
+library(rJava)
 library(magrittr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -239,16 +230,540 @@ print(bio)</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="sentence-and-word-annotations" class="section level2">
+<h2>Sentence and Word Annotations</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlvIDwtIGFzLlN0cmluZyhiaW8pXG5gYGAifQ== -->
-<pre class="r"><code>bio &lt;- as.String(bio)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjaGFuZ2VzIHRoZSBjaGFyYWN0ZXIgdmVjdG9yIHRvIGEgc3RyaW5nIG9iamVjdFxuYmlvIDwtIGFzLlN0cmluZyhiaW8pXG5gYGAifQ== -->
+<pre class="r"><code># changes the character vector to a string object
+bio &lt;- as.String(bio)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBBbm5vdGF0b3JzIGNyZWF0ZWQgZnJvbSBBbm5vdGF0aW9uIGZ1bmN0aW9uc1xuIyBBbm5vdGF0b3JzIHNhdmVkIHRvIHZhcmlhYmxlc1xuIyB3b3JkIGFubm90YXRvclxud29yZF9hbm4gPC0gTWF4ZW50X1dvcmRfVG9rZW5fQW5ub3RhdG9yKClcbiMgc2VudGVuY2UgYW5ub3RhdG9yXG5zZW50X2FubiA8LSBNYXhlbnRfU2VudF9Ub2tlbl9Bbm5vdGF0b3IoKVxuYGBgIn0= -->
+<pre class="r"><code># Annotators created from Annotation functions
+# Annotators saved to variables
+# word annotator
+word_ann &lt;- Maxent_Word_Token_Annotator()
+# sentence annotator
+sent_ann &lt;- Maxent_Sent_Token_Annotator()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhcHBseSB3b3JkIGFuZCBzZW50ZW5jZSBhbm5vdGF0b3JzIHRvIGJpbyBzdHJpbmcgb2JqZWN0XG5iaW9fYW5ub3RhdGlvbnMgPC0gYW5ub3RhdGUoYmlvLCBsaXN0KHNlbnRfYW5uLCB3b3JkX2FubikpXG5gYGAifQ== -->
+<pre class="r"><code># apply word and sentence annotators to bio string object
+bio_annotations &lt;- annotate(bio, list(sent_ann, word_ann))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xhc3MoYmlvX2Fubm90YXRpb25zKVxuYGBgIn0= -->
+<pre class="r"><code>class(bio_annotations)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQW5ub3RhdGlvblwiIFwiU3BhblwiICAgICAgXG4ifQ== -->
+<pre><code>[1] &quot;Annotation&quot; &quot;Span&quot;      </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChiaW9fYW5ub3RhdGlvbnMpXG5cbmBgYCJ9 -->
+<pre class="r"><code>head(bio_annotations)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGlkIHR5cGUgICAgIHN0YXJ0IGVuZCBmZWF0dXJlc1xuICAxIHNlbnRlbmNlICAgICAxIDExMCBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDIwPj5cbiAgMiBzZW50ZW5jZSAgIDExMiAyNDAgY29uc3RpdHVlbnRzPTw8aW50ZWdlciwyMD4+XG4gIDMgc2VudGVuY2UgICAyNDIgMzg2IGNvbnN0aXR1ZW50cz08PGludGVnZXIsMjU+PlxuICA0IHNlbnRlbmNlICAgMzg4IDQxMiBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDY+PlxuICA1IHNlbnRlbmNlICAgNDE0IDY5MyBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDQ5Pj5cbiAgNiBzZW50ZW5jZSAgIDY5NSA3OTEgY29uc3RpdHVlbnRzPTw8aW50ZWdlciwxOT4+XG4ifQ== -->
+<pre><code> id type     start end features
+  1 sentence     1 110 constituents=&lt;&lt;integer,20&gt;&gt;
+  2 sentence   112 240 constituents=&lt;&lt;integer,20&gt;&gt;
+  3 sentence   242 386 constituents=&lt;&lt;integer,25&gt;&gt;
+  4 sentence   388 412 constituents=&lt;&lt;integer,6&gt;&gt;
+  5 sentence   414 693 constituents=&lt;&lt;integer,49&gt;&gt;
+  6 sentence   695 791 constituents=&lt;&lt;integer,19&gt;&gt;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Associated metadata using meta= argument</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlvX2RvYyA8LSBBbm5vdGF0ZWRQbGFpblRleHREb2N1bWVudChiaW8sIGJpb19hbm5vdGF0aW9ucylcbmBgYCJ9 -->
+<pre class="r"><code>bio_doc &lt;- AnnotatedPlainTextDocument(bio, bio_annotations)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>View(bio_doc) does not reveal much</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2VudHMoYmlvX2RvYykgJT4lIGhlYWQoMilcbmBgYCJ9 -->
+<pre class="r"><code>sents(bio_doc) %&gt;% head(2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cbiBbMV0gXCJJblwiICAgICAgICAgICBcIjE4MDRcIiAgICAgICAgIFwiLFwiICAgICAgICAgICAgXCJhZnRlclwiICAgICAgIFxuIFs1XSBcInNldmVyYWxcIiAgICAgIFwibW9udGhzXCIgICAgICAgXCJvZlwiICAgICAgICAgICBcInByb2ZvdW5kXCIgICAgXG4gWzldIFwic3Bpcml0dWFsXCIgICAgXCJhbnhpZXR5XCIgICAgICBcIixcIiAgICAgICAgICAgIFwiSmFyZW5hXCIgICAgICBcblsxM10gXCJMZWVcIiAgICAgICAgICBcIm1vdmVkXCIgICAgICAgIFwiZnJvbVwiICAgICAgICAgXCJOZXdcIiAgICAgICAgIFxuWzE3XSBcIkplcnNleVwiICAgICAgIFwidG9cIiAgICAgICAgICAgXCJQaGlsYWRlbHBoaWFcIiBcIi5cIiAgICAgICAgICAgXG5cbltbMl1dXG4gWzFdIFwiVGhlcmVcIiAgICAgICAgIFwic2hlXCIgICAgICAgICAgIFwibGFib3JlZFwiICAgICAgXG4gWzRdIFwiYXNcIiAgICAgICAgICAgIFwiYVwiICAgICAgICAgICAgIFwiZG9tZXN0aWNcIiAgICAgXG4gWzddIFwiYW5kXCIgICAgICAgICAgIFwid29yc2hpcGVkXCIgICAgIFwiYW1vbmdcIiAgICAgICAgXG5bMTBdIFwid2hpdGVcIiAgICAgICAgIFwiY29uZ3JlZ2F0aW9uc1wiIFwib2ZcIiAgICAgICAgICAgXG5bMTNdIFwiUm9tYW5cIiAgICAgICAgIFwiQ2F0aG9saWNzXCIgICAgIFwiYW5kXCIgICAgICAgICAgXG5bMTZdIFwibWl4ZWRcIiAgICAgICAgIFwiY29uZ3JlZ2F0aW9uc1wiIFwib2ZcIiAgICAgICAgICAgXG5bMTldIFwiTWV0aG9kaXN0c1wiICAgIFwiLlwiICAgICAgICAgICAgXG4ifQ== -->
+<pre><code>[[1]]
+ [1] &quot;In&quot;           &quot;1804&quot;         &quot;,&quot;            &quot;after&quot;       
+ [5] &quot;several&quot;      &quot;months&quot;       &quot;of&quot;           &quot;profound&quot;    
+ [9] &quot;spiritual&quot;    &quot;anxiety&quot;      &quot;,&quot;            &quot;Jarena&quot;      
+[13] &quot;Lee&quot;          &quot;moved&quot;        &quot;from&quot;         &quot;New&quot;         
+[17] &quot;Jersey&quot;       &quot;to&quot;           &quot;Philadelphia&quot; &quot;.&quot;           
+
+[[2]]
+ [1] &quot;There&quot;         &quot;she&quot;           &quot;labored&quot;      
+ [4] &quot;as&quot;            &quot;a&quot;             &quot;domestic&quot;     
+ [7] &quot;and&quot;           &quot;worshiped&quot;     &quot;among&quot;        
+[10] &quot;white&quot;         &quot;congregations&quot; &quot;of&quot;           
+[13] &quot;Roman&quot;         &quot;Catholics&quot;     &quot;and&quot;          
+[16] &quot;mixed&quot;         &quot;congregations&quot; &quot;of&quot;           
+[19] &quot;Methodists&quot;    &quot;.&quot;            </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGUgZmlyc3QgMTAgd29yZHMgaW4gYmlvX2RvY1xud29yZHMoYmlvX2RvYykgJT4lIGhlYWQoMTApXG5gYGAifQ== -->
+<pre class="r"><code># the first 10 words in bio_doc
+words(bio_doc) %&gt;% head(10)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIkluXCIgICAgICAgIFwiMTgwNFwiICAgICAgXCIsXCIgICAgICAgICBcImFmdGVyXCIgICAgIFwic2V2ZXJhbFwiICBcbiBbNl0gXCJtb250aHNcIiAgICBcIm9mXCIgICAgICAgIFwicHJvZm91bmRcIiAgXCJzcGlyaXR1YWxcIiBcImFueGlldHlcIiAgXG4ifQ== -->
+<pre><code> [1] &quot;In&quot;        &quot;1804&quot;      &quot;,&quot;         &quot;after&quot;     &quot;several&quot;  
+ [6] &quot;months&quot;    &quot;of&quot;        &quot;profound&quot;  &quot;spiritual&quot; &quot;anxiety&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
+<div id="annotation-people-and-places" class="section level2">
+<h2>Annotation people and places</h2>
+<p>technique: named entity recognition (NER)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGVyc29uX2FubiA8LSBNYXhlbnRfRW50aXR5X0Fubm90YXRvcihraW5kID0gXCJwZXJzb25cIilcbmxvY2F0aW9uX2FubiA8LSBNYXhlbnRfRW50aXR5X0Fubm90YXRvcihraW5kID0gXCJsb2NhdGlvblwiKVxub3JnYW5pemF0aW9uX2FubiA8LSBNYXhlbnRfRW50aXR5X0Fubm90YXRvcihraW5kID0gXCJvcmdhbml6YXRpb25cIilcbmBgYCJ9 -->
+<pre class="r"><code>person_ann &lt;- Maxent_Entity_Annotator(kind = &quot;person&quot;)
+location_ann &lt;- Maxent_Entity_Annotator(kind = &quot;location&quot;)
+organization_ann &lt;- Maxent_Entity_Annotator(kind = &quot;organization&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjcmVhdGluZyBhbiBhbm5vdGF0ZWQgcGxhaW4gdGV4dCBkb2N1bWVudCBcbiMgdGhpcyBsaW5lIGNvbWJpbmVzIGFsbCBvZiB0aGUgYW5ub3RhdG9ycyBpbnRvIG9uZSBsaXN0IC8gdmFyaWFibGVcbnBpcGVsaW5lIDwtIGxpc3Qoc2VudF9hbm4sXG4gICAgICAgICAgICAgICAgIHdvcmRfYW5uLFxuICAgICAgICAgICAgICAgICBwZXJzb25fYW5uLFxuICAgICAgICAgICAgICAgICBsb2NhdGlvbl9hbm4sXG4gICAgICAgICAgICAgICAgIG9yZ2FuaXphdGlvbl9hbm4pXG4jIGJpb19hbm5vdGF0aW9ucyA8LSBhcHBsaWVzIGFsbCBhbm5vdGF0b3JzIHRvIHN0cmluZyBvYmplY3RcbmJpb19hbm5vdGF0aW9ucyA8LSBhbm5vdGF0ZShiaW8sIHBpcGVsaW5lKVxuIyBiaW9fZG9jIGNyZWF0aW5nIGFuIGFubm90YXRlZCBwbGFpbiB0ZXh0IGRvY3VtZW50IFxuYmlvX2RvYyA8LSBBbm5vdGF0ZWRQbGFpblRleHREb2N1bWVudChiaW8sIGJpb19hbm5vdGF0aW9ucylcbmBgYCJ9 -->
+<pre class="r"><code># creating an annotated plain text document 
+# this line combines all of the annotators into one list / variable
+pipeline &lt;- list(sent_ann,
+                 word_ann,
+                 person_ann,
+                 location_ann,
+                 organization_ann)
+# bio_annotations &lt;- applies all annotators to string object
+bio_annotations &lt;- annotate(bio, pipeline)
+# bio_doc creating an annotated plain text document 
+bio_doc &lt;- AnnotatedPlainTextDocument(bio, bio_annotations)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBlYXN5IGZ1bmN0aW9uIGZvciBleHRyYWN0aW5nIGVudGl0aWVzIGZyb20gYW4gQW5ub3RhdGVkIFBsYWluIFRleHQgRG9jdW1lbnQgKHdlIHdpbGwgdXNlIHRoaXMgaW4gdGhlIG5leHQgY29kZSBjaHVuaylcbmVudGl0aWVzIDwtIGZ1bmN0aW9uKGRvYywga2luZCkge1xuICBzIDwtIGRvYyRjb250ZW50XG4gIGEgPC0gYW5ub3RhdGlvbihkb2MpXG4gIGlmKGhhc0FyZyhraW5kKSkge1xuICAgIGsgPC0gc2FwcGx5KGEkZmVhdHVyZXMsIGBbW2AsIFwia2luZFwiKVxuICAgIHNbYVtrID09IGtpbmRdXVxuICB9IGVsc2Uge1xuICAgIHNbYVthJHR5cGUgPT0gXCJlbnRpdHlcIl1dXG4gIH1cbn1cbmBgYCJ9 -->
+<pre class="r"><code># easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
+entities &lt;- function(doc, kind) {
+  s &lt;- doc$content
+  a &lt;- annotation(doc)
+  if(hasArg(kind)) {
+    k &lt;- sapply(a$features, `[[`, &quot;kind&quot;)
+    s[a[k == kind]]
+  } else {
+    s[a[a$type == &quot;entity&quot;]]
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB1c2UgZW50aXRpZXMgZnVuY3Rpb24gZnJvbSB0aGUgcHJldmlvdXMgY29kZSBjaHVua1xuIyBzZXBhcmF0aW5nIG91dCBcInBlcnNvblwiIGVudGl0eVxuZW50aXRpZXMoYmlvX2RvYywga2luZCA9IFwicGVyc29uXCIpXG5gYGAifQ== -->
+<pre class="r"><code># use entities function from the previous code chunk
+# separating out &quot;person&quot; entity
+entities(bio_doc, kind = &quot;person&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSmFyZW5hIExlZVwiICAgIFwiUmljaGFyZCBBbGxlblwiIFwiTGVlXCIgICAgICAgICAgXG5bNF0gXCJKb3NlcGggTGVlXCIgICBcbiJ9 -->
+<pre><code>[1] &quot;Jarena Lee&quot;    &quot;Richard Allen&quot; &quot;Lee&quot;          
+[4] &quot;Joseph Lee&quot;   </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>^ originally this line did not work (output: character(0)) and there were a couple of errors within the original function - annotations(doc) is not a function I found this out through ?annotation in the console - annotation(doc)[[1]] also finds nothing in comparison with the results that you find in the tutorial, I checked the output of annotation(bio_doc) which gives a long list and at the end, shows the kind= people, location, and organization (which is surely what we are looking for)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5ub3RhdGlvbihiaW9fZG9jKVxuYGBgIn0= -->
+<pre class="r"><code>annotation(bio_doc)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGlkICB0eXBlICAgICBzdGFydCBlbmQgZmVhdHVyZXNcbiAgIDEgc2VudGVuY2UgICAgIDEgMTEwIGNvbnN0aXR1ZW50cz08PGludGVnZXIsMjA+PlxuICAgMiBzZW50ZW5jZSAgIDExMiAyNDAgY29uc3RpdHVlbnRzPTw8aW50ZWdlciwyMD4+XG4gICAzIHNlbnRlbmNlICAgMjQyIDM4NiBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDI1Pj5cbiAgIDQgc2VudGVuY2UgICAzODggNDEyIGNvbnN0aXR1ZW50cz08PGludGVnZXIsNj4+XG4gICA1IHNlbnRlbmNlICAgNDE0IDY5MyBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDQ5Pj5cbiAgIDYgc2VudGVuY2UgICA2OTUgNzkxIGNvbnN0aXR1ZW50cz08PGludGVnZXIsMTk+PlxuICAgNyBzZW50ZW5jZSAgIDc5MyA4NDQgY29uc3RpdHVlbnRzPTw8aW50ZWdlciwxMj4+XG4gICA4IHdvcmQgICAgICAgICAxICAgMiBcbiAgIDkgd29yZCAgICAgICAgIDQgICA3IFxuICAxMCB3b3JkICAgICAgICAgOCAgIDggXG4gIDExIHdvcmQgICAgICAgIDEwICAxNCBcbiAgMTIgd29yZCAgICAgICAgMTYgIDIyIFxuICAxMyB3b3JkICAgICAgICAyNCAgMjkgXG4gIDE0IHdvcmQgICAgICAgIDMxICAzMiBcbiAgMTUgd29yZCAgICAgICAgMzQgIDQxIFxuICAxNiB3b3JkICAgICAgICA0MyAgNTEgXG4gIDE3IHdvcmQgICAgICAgIDUzICA1OSBcbiAgMTggd29yZCAgICAgICAgNjAgIDYwIFxuICAxOSB3b3JkICAgICAgICA2MiAgNjcgXG4gIDIwIHdvcmQgICAgICAgIDY5ICA3MSBcbiAgMjEgd29yZCAgICAgICAgNzMgIDc3IFxuICAyMiB3b3JkICAgICAgICA3OSAgODIgXG4gIDIzIHdvcmQgICAgICAgIDg0ICA4NiBcbiAgMjQgd29yZCAgICAgICAgODggIDkzIFxuICAyNSB3b3JkICAgICAgICA5NSAgOTYgXG4gIDI2IHdvcmQgICAgICAgIDk4IDEwOSBcbiAgMjcgd29yZCAgICAgICAxMTAgMTEwIFxuICAyOCB3b3JkICAgICAgIDExMiAxMTYgXG4gIDI5IHdvcmQgICAgICAgMTE4IDEyMCBcbiAgMzAgd29yZCAgICAgICAxMjIgMTI4IFxuICAzMSB3b3JkICAgICAgIDEzMCAxMzEgXG4gIDMyIHdvcmQgICAgICAgMTMzIDEzMyBcbiAgMzMgd29yZCAgICAgICAxMzUgMTQyIFxuICAzNCB3b3JkICAgICAgIDE0NCAxNDYgXG4gIDM1IHdvcmQgICAgICAgMTQ4IDE1NiBcbiAgMzYgd29yZCAgICAgICAxNTggMTYyIFxuICAzNyB3b3JkICAgICAgIDE2NCAxNjggXG4gIDM4IHdvcmQgICAgICAgMTcwIDE4MiBcbiAgMzkgd29yZCAgICAgICAxODQgMTg1IFxuICA0MCB3b3JkICAgICAgIDE4NyAxOTEgXG4gIDQxIHdvcmQgICAgICAgMTkzIDIwMSBcbiAgNDIgd29yZCAgICAgICAyMDMgMjA1IFxuICA0MyB3b3JkICAgICAgIDIwNyAyMTEgXG4gIDQ0IHdvcmQgICAgICAgMjEzIDIyNSBcbiAgNDUgd29yZCAgICAgICAyMjcgMjI4IFxuICA0NiB3b3JkICAgICAgIDIzMCAyMzkgXG4gIDQ3IHdvcmQgICAgICAgMjQwIDI0MCBcbiAgNDggd29yZCAgICAgICAyNDIgMjQzIFxuICA0OSB3b3JkICAgICAgIDI0NSAyNTEgXG4gIDUwIHdvcmQgICAgICAgMjUzIDI1NCBcbiAgNTEgd29yZCAgICAgICAyNTYgMjYzIFxuICA1MiB3b3JkICAgICAgIDI2NSAyNzAgXG4gIDUzIHdvcmQgICAgICAgMjcyIDI3MyBcbiAgNTQgd29yZCAgICAgICAyNzUgMjc3IFxuICA1NSB3b3JkICAgICAgIDI3OSAyODYgXG4gIDU2IHdvcmQgICAgICAgMjg4IDI5NCBcbiAgNTcgd29yZCAgICAgICAyOTYgMzAwIFxuICA1OCB3b3JkICAgICAgIDMwMSAzMDEgXG4gIDU5IHdvcmQgICAgICAgMzAzIDMwOSBcbiAgNjAgd29yZCAgICAgICAzMTEgMzEyIFxuICA2MSB3b3JkICAgICAgIDMxNCAzMTYgXG4gIDYyIHdvcmQgICAgICAgMzE4IDMyMyBcbiAgNjMgd29yZCAgICAgICAzMjUgMzMxIFxuICA2NCB3b3JkICAgICAgIDMzMyAzNDEgXG4gIDY1IHdvcmQgICAgICAgMzQzIDM1MSBcbiAgNjYgd29yZCAgICAgICAzNTMgMzU4IFxuICA2NyB3b3JkICAgICAgIDM1OSAzNTkgXG4gIDY4IHdvcmQgICAgICAgMzYxIDM2MyBcbiAgNjkgd29yZCAgICAgICAzNjUgMzcwIFxuICA3MCB3b3JkICAgICAgIDM3MiAzNzQgXG4gIDcxIHdvcmQgICAgICAgMzc2IDM4NSBcbiAgNzIgd29yZCAgICAgICAzODYgMzg2IFxuICA3MyB3b3JkICAgICAgIDM4OCAzOTAgXG4gIDc0IHdvcmQgICAgICAgMzkyIDM5NCBcbiAgNzUgd29yZCAgICAgICAzOTYgNDAzIFxuICA3NiB3b3JkICAgICAgIDQwNSA0MDYgXG4gIDc3IHdvcmQgICAgICAgNDA4IDQxMSBcbiAgNzggd29yZCAgICAgICA0MTIgNDEyIFxuICA3OSB3b3JkICAgICAgIDQxNCA0MTggXG4gIDgwIHdvcmQgICAgICAgNDIwIDQyMSBcbiAgODEgd29yZCAgICAgICA0MjMgNDI1IFxuICA4MiB3b3JkICAgICAgIDQyNyA0MzMgXG4gIDgzIHdvcmQgICAgICAgNDM0IDQzNCBcbiAgODQgd29yZCAgICAgICA0MzYgNDM4IFxuICA4NSB3b3JkICAgICAgIDQ0MCA0NTAgXG4gIDg2IHdvcmQgICAgICAgNDUyIDQ1NCBcbiAgODcgd29yZCAgICAgICA0NTYgNDYyIFxuICA4OCB3b3JkICAgICAgIDQ2NCA0NzEgXG4gIDg5IHdvcmQgICAgICAgNDczIDQ3NSBcbiAgOTAgd29yZCAgICAgICA0NzcgNDg1IFxuICA5MSB3b3JkICAgICAgIDQ4NyA0OTIgXG4gIDkyIHdvcmQgICAgICAgNDk0IDQ5NSBcbiAgOTMgd29yZCAgICAgICA0OTcgNTA2IFxuICA5NCB3b3JkICAgICAgIDUwNyA1MDcgXG4gIDk1IHdvcmQgICAgICAgNTA5IDUxOCBcbiAgOTYgd29yZCAgICAgICA1MjAgNTI2IFxuICA5NyB3b3JkICAgICAgIDUyOCA1MjkgXG4gIDk4IHdvcmQgICAgICAgNTMxIDUzNiBcbiAgOTkgd29yZCAgICAgICA1MzggNTQwIFxuIDEwMCB3b3JkICAgICAgIDU0MiA1NDggXG4gMTAxIHdvcmQgICAgICAgNTUwIDU1OCBcbiAxMDIgd29yZCAgICAgICA1NTkgNTU5IFxuIDEwMyB3b3JkICAgICAgIDU2MSA1NjcgXG4gMTA0IHdvcmQgICAgICAgNTY5IDU3NiBcbiAxMDUgd29yZCAgICAgICA1NzggNTc5IFxuIDEwNiB3b3JkICAgICAgIDU4MSA1ODcgXG4gMTA3IHdvcmQgICAgICAgNTg5IDU5MSBcbiAxMDggd29yZCAgICAgICA1OTMgNjAyIFxuIDEwOSB3b3JkICAgICAgIDYwMyA2MDMgXG4gMTEwIHdvcmQgICAgICAgNjA1IDYxNCBcbiAxMTEgd29yZCAgICAgICA2MTYgNjIyIFxuIDExMiB3b3JkICAgICAgIDYyNCA2MjUgXG4gMTEzIHdvcmQgICAgICAgNjI3IDYzNiBcbiAxMTQgd29yZCAgICAgICA2MzcgNjM3IFxuIDExNSB3b3JkICAgICAgIDYzOSA2NDUgXG4gMTE2IHdvcmQgICAgICAgNjQ2IDY0NiBcbiAxMTcgd29yZCAgICAgICA2NDggNjUwIFxuIDExOCB3b3JkICAgICAgIDY1MiA2NTcgXG4gMTE5IHdvcmQgICAgICAgNjU4IDY1OCBcbiAxMjAgd29yZCAgICAgICA2NjAgNjY0IFxuIDEyMSB3b3JkICAgICAgIDY2NiA2NjggXG4gMTIyIHdvcmQgICAgICAgNjcwIDY3NCBcbiAxMjMgd29yZCAgICAgICA2NzUgNjc1IFxuIDEyNCB3b3JkICAgICAgIDY3NyA2ODIgXG4gMTI1IHdvcmQgICAgICAgNjg0IDY4NiBcbiAxMjYgd29yZCAgICAgICA2ODggNjkyIFxuIDEyNyB3b3JkICAgICAgIDY5MyA2OTMgXG4gMTI4IHdvcmQgICAgICAgNjk1IDY5NiBcbiAxMjkgd29yZCAgICAgICA2OTggNzAxIFxuIDEzMCB3b3JkICAgICAgIDcwMyA3MDUgXG4gMTMxIHdvcmQgICAgICAgNzA3IDcxMyBcbiAxMzIgd29yZCAgICAgICA3MTUgNzIwIFxuIDEzMyB3b3JkICAgICAgIDcyMiA3MjQgXG4gMTM0IHdvcmQgICAgICAgNzI1IDcyNSBcbiAxMzUgd29yZCAgICAgICA3MjcgNzI5IFxuIDEzNiB3b3JkICAgICAgIDczMSA3MzggXG4gMTM3IHdvcmQgICAgICAgNzQwIDc0MSBcbiAxMzggd29yZCAgICAgICA3NDMgNzU4IFxuIDEzOSB3b3JkICAgICAgIDc2MCA3NjUgXG4gMTQwIHdvcmQgICAgICAgNzY3IDc2OCBcbiAxNDEgd29yZCAgICAgICA3NzAgNzczIFxuIDE0MiB3b3JkICAgICAgIDc3NSA3NzggXG4gMTQzIHdvcmQgICAgICAgNzc5IDc3OSBcbiAxNDQgd29yZCAgICAgICA3ODEgNzgzIFxuIDE0NSB3b3JkICAgICAgIDc4NSA3OTAgXG4gMTQ2IHdvcmQgICAgICAgNzkxIDc5MSBcbiAxNDcgd29yZCAgICAgICA3OTMgNzk2IFxuIDE0OCB3b3JkICAgICAgIDc5OCA4MDAgXG4gMTQ5IHdvcmQgICAgICAgODAyIDgwNCBcbiAxNTAgd29yZCAgICAgICA4MDYgODEzIFxuIDE1MSB3b3JkICAgICAgIDgxNCA4MTQgXG4gMTUyIHdvcmQgICAgICAgODE2IDgxOSBcbiAxNTMgd29yZCAgICAgICA4MjEgODIyIFxuIDE1NCB3b3JkICAgICAgIDgyNCA4MjcgXG4gMTU1IHdvcmQgICAgICAgODI5IDgzMiBcbiAxNTYgd29yZCAgICAgICA4MzQgODM1IFxuIDE1NyB3b3JkICAgICAgIDgzNyA4NDMgXG4gMTU4IHdvcmQgICAgICAgODQ0IDg0NCBcbiAxNTkgZW50aXR5ICAgICAgNjIgIDcxIGtpbmQ9cGVyc29uXG4gMTYwIGVudGl0eSAgICAgMjg4IDMwMCBraW5kPXBlcnNvblxuIDE2MSBlbnRpdHkgICAgIDM2MSAzNjMga2luZD1wZXJzb25cbiAxNjIgZW50aXR5ICAgICA3MTUgNzI0IGtpbmQ9cGVyc29uXG4gMTYzIGVudGl0eSAgICAgIDg0ICA5MyBraW5kPWxvY2F0aW9uXG4gMTY0IGVudGl0eSAgICAgIDk4IDEwOSBraW5kPWxvY2F0aW9uXG4gMTY1IGVudGl0eSAgICAgNzgxIDc5MCBraW5kPWxvY2F0aW9uXG4gMTY2IGVudGl0eSAgICAgMzE4IDM1OCBraW5kPW9yZ2FuaXphdGlvblxuIn0= -->
+<pre><code> id  type     start end features
+   1 sentence     1 110 constituents=&lt;&lt;integer,20&gt;&gt;
+   2 sentence   112 240 constituents=&lt;&lt;integer,20&gt;&gt;
+   3 sentence   242 386 constituents=&lt;&lt;integer,25&gt;&gt;
+   4 sentence   388 412 constituents=&lt;&lt;integer,6&gt;&gt;
+   5 sentence   414 693 constituents=&lt;&lt;integer,49&gt;&gt;
+   6 sentence   695 791 constituents=&lt;&lt;integer,19&gt;&gt;
+   7 sentence   793 844 constituents=&lt;&lt;integer,12&gt;&gt;
+   8 word         1   2 
+   9 word         4   7 
+  10 word         8   8 
+  11 word        10  14 
+  12 word        16  22 
+  13 word        24  29 
+  14 word        31  32 
+  15 word        34  41 
+  16 word        43  51 
+  17 word        53  59 
+  18 word        60  60 
+  19 word        62  67 
+  20 word        69  71 
+  21 word        73  77 
+  22 word        79  82 
+  23 word        84  86 
+  24 word        88  93 
+  25 word        95  96 
+  26 word        98 109 
+  27 word       110 110 
+  28 word       112 116 
+  29 word       118 120 
+  30 word       122 128 
+  31 word       130 131 
+  32 word       133 133 
+  33 word       135 142 
+  34 word       144 146 
+  35 word       148 156 
+  36 word       158 162 
+  37 word       164 168 
+  38 word       170 182 
+  39 word       184 185 
+  40 word       187 191 
+  41 word       193 201 
+  42 word       203 205 
+  43 word       207 211 
+  44 word       213 225 
+  45 word       227 228 
+  46 word       230 239 
+  47 word       240 240 
+  48 word       242 243 
+  49 word       245 251 
+  50 word       253 254 
+  51 word       256 263 
+  52 word       265 270 
+  53 word       272 273 
+  54 word       275 277 
+  55 word       279 286 
+  56 word       288 294 
+  57 word       296 300 
+  58 word       301 301 
+  59 word       303 309 
+  60 word       311 312 
+  61 word       314 316 
+  62 word       318 323 
+  63 word       325 331 
+  64 word       333 341 
+  65 word       343 351 
+  66 word       353 358 
+  67 word       359 359 
+  68 word       361 363 
+  69 word       365 370 
+  70 word       372 374 
+  71 word       376 385 
+  72 word       386 386 
+  73 word       388 390 
+  74 word       392 394 
+  75 word       396 403 
+  76 word       405 406 
+  77 word       408 411 
+  78 word       412 412 
+  79 word       414 418 
+  80 word       420 421 
+  81 word       423 425 
+  82 word       427 433 
+  83 word       434 434 
+  84 word       436 438 
+  85 word       440 450 
+  86 word       452 454 
+  87 word       456 462 
+  88 word       464 471 
+  89 word       473 475 
+  90 word       477 485 
+  91 word       487 492 
+  92 word       494 495 
+  93 word       497 506 
+  94 word       507 507 
+  95 word       509 518 
+  96 word       520 526 
+  97 word       528 529 
+  98 word       531 536 
+  99 word       538 540 
+ 100 word       542 548 
+ 101 word       550 558 
+ 102 word       559 559 
+ 103 word       561 567 
+ 104 word       569 576 
+ 105 word       578 579 
+ 106 word       581 587 
+ 107 word       589 591 
+ 108 word       593 602 
+ 109 word       603 603 
+ 110 word       605 614 
+ 111 word       616 622 
+ 112 word       624 625 
+ 113 word       627 636 
+ 114 word       637 637 
+ 115 word       639 645 
+ 116 word       646 646 
+ 117 word       648 650 
+ 118 word       652 657 
+ 119 word       658 658 
+ 120 word       660 664 
+ 121 word       666 668 
+ 122 word       670 674 
+ 123 word       675 675 
+ 124 word       677 682 
+ 125 word       684 686 
+ 126 word       688 692 
+ 127 word       693 693 
+ 128 word       695 696 
+ 129 word       698 701 
+ 130 word       703 705 
+ 131 word       707 713 
+ 132 word       715 720 
+ 133 word       722 724 
+ 134 word       725 725 
+ 135 word       727 729 
+ 136 word       731 738 
+ 137 word       740 741 
+ 138 word       743 758 
+ 139 word       760 765 
+ 140 word       767 768 
+ 141 word       770 773 
+ 142 word       775 778 
+ 143 word       779 779 
+ 144 word       781 783 
+ 145 word       785 790 
+ 146 word       791 791 
+ 147 word       793 796 
+ 148 word       798 800 
+ 149 word       802 804 
+ 150 word       806 813 
+ 151 word       814 814 
+ 152 word       816 819 
+ 153 word       821 822 
+ 154 word       824 827 
+ 155 word       829 832 
+ 156 word       834 835 
+ 157 word       837 843 
+ 158 word       844 844 
+ 159 entity      62  71 kind=person
+ 160 entity     288 300 kind=person
+ 161 entity     361 363 kind=person
+ 162 entity     715 724 kind=person
+ 163 entity      84  93 kind=location
+ 164 entity      98 109 kind=location
+ 165 entity     781 790 kind=location
+ 166 entity     318 358 kind=organization</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>And if you stick [[1]] at the end of that command, it only takes the first line of the annotations list (which does not have kind = person, location, organization)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5ub3RhdGlvbihiaW9fZG9jKVtbMV1dXG5gYGAifQ== -->
+<pre class="r"><code>annotation(bio_doc)[[1]]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIGlkIHR5cGUgICAgIHN0YXJ0IGVuZCBmZWF0dXJlc1xuICAxIHNlbnRlbmNlICAgICAxIDExMCBjb25zdGl0dWVudHM9PDxpbnRlZ2VyLDIwPj5cbiJ9 -->
+<pre><code> id type     start end features
+  1 sentence     1 110 constituents=&lt;&lt;integer,20&gt;&gt;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZW50aXRpZXMoYmlvX2RvYywga2luZCA9IFwibG9jYXRpb25cIilcbmBgYCJ9 -->
+<pre class="r"><code>entities(bio_doc, kind = &quot;location&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTmV3IEplcnNleVwiICAgXCJQaGlsYWRlbHBoaWFcIiBcIk5ldyBKZXJzZXlcIiAgXG4ifQ== -->
+<pre><code>[1] &quot;New Jersey&quot;   &quot;Philadelphia&quot; &quot;New Jersey&quot;  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZW50aXRpZXMoYmlvX2RvYywga2luZCA9IFwib3JnYW5pemF0aW9uXCIpXG5gYGAifQ== -->
+<pre class="r"><code>entities(bio_doc, kind = &quot;organization&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQmV0aGVsIEFmcmljYW4gTWV0aG9kaXN0XG5FcGlzY29wYWwgQ2h1cmNoXG4ifQ== -->
+<pre><code>Bethel African Methodist
+Episcopal Church</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="named-entity-recognition-in-a-small-corpus" class="section level1">
+<h1>Named Entity Recognition in a small corpus</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZW5hbWVzIDwtIFN5cy5nbG9iKFwiZGF0YS9pdGluZXJhbnRzLyoudHh0XCIpXG5maWxlbmFtZXNcbmBgYCJ9 -->
+<pre class="r"><code>filenames &lt;- Sys.glob(&quot;data/itinerants/*.txt&quot;)
+filenames</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZGF0YS9pdGluZXJhbnRzL2NhcnR3cmlnaHQtcGV0ZXIudHh0XCJcblsyXSBcImRhdGEvaXRpbmVyYW50cy9sZWUtamFyZW5hLnR4dFwiICAgICAgXG5bM10gXCJkYXRhL2l0aW5lcmFudHMvcHJhdHQtcGFybGV5LnR4dFwiICAgIFxuIn0= -->
+<pre><code>[1] &quot;data/itinerants/cartwright-peter.txt&quot;
+[2] &quot;data/itinerants/lee-jarena.txt&quot;      
+[3] &quot;data/itinerants/pratt-parley.txt&quot;    </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBuYW1lcyBhc3NpZ25pbmcgdG8gdGhlIGxpc3QgKGNsZWFuIHVwKVxudGV4dHMgPC0gZmlsZW5hbWVzICU+JVxuICBsYXBwbHkocmVhZExpbmVzKSAlPiVcbiAgbGFwcGx5KHBhc3RlMCwgY29sbGFwc2UgPSBcIiBcIikgJT4lXG4gIGxhcHBseShhcy5TdHJpbmcpXG5uYW1lcyh0ZXh0cykgPC0gYmFzZW5hbWUoZmlsZW5hbWVzKVxuc3RyKHRleHRzLCBtYXgubGV2ZWwgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code># names assigning to the list (clean up)
+texts &lt;- filenames %&gt;%
+  lapply(readLines) %&gt;%
+  lapply(paste0, collapse = &quot; &quot;) %&gt;%
+  lapply(as.String)
+names(texts) &lt;- basename(filenames)
+str(texts, max.level = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGlzdCBvZiAzXG4gJCBjYXJ0d3JpZ2h0LXBldGVyLnR4dDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiQXV0b2Jpb2dyYXBoeSBvZiBQZXRlciBDYXJ0d3JpZ2h0ICBQZXRlciBDYXJ0d3JpZ2h0LCBXaWxsaWFtIFBldGVyIFN0cmlja2xhbmQgICAgIGnDqWFyYmF0YiBFaWhpbml0cCBmaXRib29sICAxfFwifCBfX3RydW5jYXRlZF9fXG4gJCBsZWUtamFyZW5hLnR4dCAgICAgIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiUkVMSUdJT1VTIEVYUEVSSUVOQ0UgIFxcXFxKT1VSTkFMICAwMScgIE1SUy4gSkFSRU5BIDFfO0VFLCAgY3R2bWEgIEEgQU4gQUNDT1VOVCBEUkhSTENBTEwgVDAgUFJFQUNIIFRIRSBHT1NQRUwuICBcInwgX190cnVuY2F0ZWRfX1xuICQgcHJhdHQtcGFybGV5LnR4dCAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRIRSAgQVVUT0JJT0dSQVBIWSAgICBQQVJMRVkgUEFSS0VSIFBSQVRULCAgT05FIDA/IFRIRSAgVFdFTFZFIEFQT1NUTEVTICBPUCBUMTEzICBFaHVtaCBuZiBKZXN1cyBFaHJpc3QgbmYgTGFydFwifCBfX3RydW5jYXRlZF9fXG4ifQ== -->
+<pre><code>List of 3
+ $ cartwright-peter.txt:Class 'String'  chr &quot;Autobiography of Peter Cartwright  Peter Cartwright, William Peter Strickland     iéarbatb Eihinitp fitbool  1|&quot;| __truncated__
+ $ lee-jarena.txt      :Class 'String'  chr &quot;RELIGIOUS EXPERIENCE  \\JOURNAL  01'  MRS. JARENA 1_;EE,  ctvma  A AN ACCOUNT DRHRLCALL T0 PREACH THE GOSPEL.  &quot;| __truncated__
+ $ pratt-parley.txt    :Class 'String'  chr &quot;THE  AUTOBIOGRAPHY    PARLEY PARKER PRATT,  ONE 0? THE  TWELVE APOSTLES  OP T113  Ehumh nf Jesus Ehrist nf Lart&quot;| __truncated__</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhIGZ1bmN0aW9uIHRoYXQgYW5ub3RhdGVzIHRleHQgYW5kIHRoZW4gY3JlYXRlcyBhIEFubm90YXRlZFBsYWluVGV4dERvY3VtZW50XG5hbm5vdGF0ZV9lbnRpdGllcyA8LSBmdW5jdGlvbihkb2MsIGFubm90YXRpb25fcGlwZWxpbmUpIHtcbiAgcHJpbnQoXCJFcnJcIilcbiAgYW5ub3RhdGlvbnMgPC0gYW5ub3RhdGUoZG9jLCBhbm5vdGF0aW9uX3BpcGVsaW5lKVxuICBwcmludChcImVlcjJcIilcbiAgQW5ub3RhdGVkUGxhaW5UZXh0RG9jdW1lbnQoZG9jLCBhbm5vdGF0aW9ucylcbn1cbmBgYCJ9 -->
+<pre class="r"><code># a function that annotates text and then creates a AnnotatedPlainTextDocument
+annotate_entities &lt;- function(doc, annotation_pipeline) {
+  print(&quot;Err&quot;)
+  annotations &lt;- annotate(doc, annotation_pipeline)
+  print(&quot;eer2&quot;)
+  AnnotatedPlainTextDocument(doc, annotations)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjcmVhdGVzIGEgbGlzdCBvZiB0aGUgZGlmZmVyZW50IGFubm90YXRvcnM6IHdvcmQsIHNlbnRlbmNlLCBwZXJzb24sIGxvY2F0aW9uIFxuaXRpbmVyYW50c19waXBlbGluZSA8LSBsaXN0KFxuICBNYXhlbnRfU2VudF9Ub2tlbl9Bbm5vdGF0b3IoKSxcbiAgTWF4ZW50X1dvcmRfVG9rZW5fQW5ub3RhdG9yKCksXG4gIE1heGVudF9FbnRpdHlfQW5ub3RhdG9yKGtpbmQgPSBcInBlcnNvblwiKSxcbiAgTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9IFwibG9jYXRpb25cIilcbilcbmBgYCJ9 -->
+<pre class="r"><code># creates a list of the different annotators: word, sentence, person, location 
+itinerants_pipeline &lt;- list(
+  Maxent_Sent_Token_Annotator(),
+  Maxent_Word_Token_Annotator(),
+  Maxent_Entity_Annotator(kind = &quot;person&quot;),
+  Maxent_Entity_Annotator(kind = &quot;location&quot;)
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Below - do not run</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4dHNfYW5ub3RhdGVkIDwtIHRleHRzICU+JVxuICBsYXBwbHkoYW5ub3RhdGVfZW50aXRpZXMsIGl0aW5lcmFudHNfcGlwZWxpbmUpXG5gYGAifQ== -->
+<pre class="r"><code>texts_annotated &lt;- texts %&gt;%
+  lapply(annotate_entities, itinerants_pipeline)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRXJyXCJcbiJ9 -->
+<pre><code>[1] &quot;Err&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYXMuZGF0YS5mcmFtZS5kZWZhdWx0KHhbW2ldXSwgb3B0aW9uYWwgPSBUUlVFKSA6IFxuICBjYW5ub3QgY29lcmNlIGNsYXNzIFwiYyhcIlNpbXBsZV9TZW50X1Rva2VuX0Fubm90YXRvclwiLCBcIkFubm90YXRvclwiKVwiIHRvIGEgZGF0YS5mcmFtZVxuIn0= -->
+<pre><code>Error in as.data.frame.default(x[[i]], optional = TRUE) : 
+  cannot coerce class &quot;c(&quot;Simple_Sent_Token_Annotator&quot;, &quot;Annotator&quot;)&quot; to a data.frame</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxhY2VzIDwtIHRleHRzX2Fubm90YXRlZCAlPiVcbiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gXCJsb2NhdGlvblwiKVxuYGBgIn0= -->
+<pre class="r"><code>places &lt;- texts_annotated %&gt;%
+  lapply(entities, kind = &quot;location&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZXZhbChsaHMsIHBhcmVudCwgcGFyZW50KSA6IG9iamVjdCAndGV4dHNfYW5ub3RhdGVkJyBub3QgZm91bmRcbiJ9 -->
+<pre><code>Error in eval(lhs, parent, parent) : object 'texts_annotated' not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxhY2VzICU+JVxuICBzYXBwbHkobGVuZ3RoKVxuYGBgIn0= -->
+<pre class="r"><code>places %&gt;%
+  sapply(length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxhY2VzICU+JVxuICBsYXBwbHkodW5pcXVlKSAlPiVcbiAgc2FwcGx5KGxlbmd0aClcbmBgYCJ9 -->
+<pre class="r"><code>places %&gt;%
+  lapply(unique) %&gt;%
+  sapply(length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGVvcGxlICU+JVxuICBzYXBwbHkobGVuZ3RoKVxuYGBgIn0= -->
+<pre class="r"><code>people %&gt;%
+  sapply(length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGVvcGxlICU+JVxuICBsYXBwbHkodW5pcXVlKSAlPiVcbiAgc2FwcGx5KGxlbmd0aClcbmBgYCJ9 -->
+<pre class="r"><code>people %&gt;%
+  lapply(unique) %&gt;%
+  sapply(length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ21hcClcblxuYGBgIn0= -->
+<pre class="r"><code>library(ggmap)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBnZ3Bsb3QyXG5XYW50IHRvIHVuZGVyc3RhbmQgaG93IGFsbCB0aGUgcGllY2VzIGZpdFxudG9nZXRoZXI/IFNlZSB0aGUgUiBmb3IgRGF0YSBTY2llbmNlIGJvb2s6XG5odHRwOi8vcjRkcy5oYWQuY28ubnovXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhnZ3Bsb3Qy4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6TkxQ4oCZOlxuXG4gICAgYW5ub3RhdGVcblxuR29vZ2xlIE1hcHMgQVBJIFRlcm1zIG9mIFNlcnZpY2U6IGh0dHA6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vbWFwcy90ZXJtcy5cblBsZWFzZSBjaXRlIGdnbWFwIGlmIHlvdSB1c2UgaXQ6IHNlZSBjaXRhdGlvbignZ2dtYXAnKSBmb3IgZGV0YWlscy5cblxuQXR0YWNoaW5nIHBhY2thZ2U6IOKAmGdnbWFw4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6bWFncml0dHLigJk6XG5cbiAgICBpbnNldFxuIn0= -->
+<pre><code>Loading required package: ggplot2
+Want to understand how all the pieces fit
+together? See the R for Data Science book:
+http://r4ds.had.co.nz/
+
+Attaching package: ‘ggplot2’
+
+The following object is masked from ‘package:NLP’:
+
+    annotate
+
+Google Maps API Terms of Service: http://developers.google.com/maps/terms.
+Please cite ggmap if you use it: see citation('ggmap') for details.
+
+Attaching package: ‘ggmap’
+
+The following object is masked from ‘package:magrittr’:
+
+    inset</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxsX3BsYWNlcyA8LSB1bmlvbihwbGFjZXNbW1wicHJhdHQtcGFybGV5LnR4dFwiXV0sIHBsYWNlc1tbXCJjYXJ0d3JpZ2h0LXBldGVyLnR4dFwiXV0pICU+JSB1bmlvbihwbGFjZXNbW1wibGVlLWphcmVuYS50eHRcIl1dKVxuYGBgIn0= -->
+<pre class="r"><code>all_places &lt;- union(places[[&quot;pratt-parley.txt&quot;]], places[[&quot;cartwright-peter.txt&quot;]]) %&gt;% union(places[[&quot;lee-jarena.txt&quot;]])</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTkxQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIE5hdHVyYWwgTGFuZ3VhZ2UgUHJvY2Vzc2luZwoKIyMjIEluc3RhbGxpbmcgdGhlIE5lY2Vzc2FyeSBMaWJyYXJpZXMKCmBgYHtyfQpsaWJyYXJ5KE5MUCkKbGlicmFyeShvcGVuTkxQKQpsaWJyYXJ5KFJXZWthKQpsaWJyYXJ5KHJKYXZhKQpsaWJyYXJ5KG1hZ3JpdHRyKQpgYGAKCgpJIHdhcyB3YXJuZWQgaXQgd291bGQgZ2V0IGFuZ3J5CgojIyBCYXNpYyBUb2tlbml6YXRpb24KCmBgYHtyfQojIG1hZGUgdGhlIGZvbGRlciBwYXRoIHdpdGhpbiB0aGUgaG9tZXdvcmsgZm9sZGVyCmJpbyA8LSByZWFkTGluZXMoImRhdGEvbmxwL2FuYi1qYXJlbmEtbGVlLnR4dCIpCnByaW50KGJpbykKYGBgCgpgYGB7cn0KYmlvIDwtIHBhc3RlKGJpbywgY29sbGFwc2UgPSAiICIpCnByaW50KGJpbykKYGBgCgpgYGB7cn0KYmlvIDwtIGFzLlN0cmluZyhiaW8pCmBgYAo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTkxQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIE5hdHVyYWwgTGFuZ3VhZ2UgUHJvY2Vzc2luZwoKIyMjIEluc3RhbGxpbmcgdGhlIE5lY2Vzc2FyeSBMaWJyYXJpZXMKCmBgYHtyfQpsaWJyYXJ5KE5MUCkKbGlicmFyeShvcGVuTkxQKQpsaWJyYXJ5KFJXZWthKQpsaWJyYXJ5KHJKYXZhKQpsaWJyYXJ5KG1hZ3JpdHRyKQpgYGAKCgpJIHdhcyB3YXJuZWQgaXQgd291bGQgZ2V0IGFuZ3J5CgojIyBCYXNpYyBUb2tlbml6YXRpb24KCmBgYHtyfQojIG1hZGUgdGhlIGZvbGRlciBwYXRoIHdpdGhpbiB0aGUgaG9tZXdvcmsgZm9sZGVyCmJpbyA8LSByZWFkTGluZXMoImRhdGEvbmxwL2FuYi1qYXJlbmEtbGVlLnR4dCIpCnByaW50KGJpbykKYGBgCgpgYGB7cn0KIyBUaGlzIHJlbW92ZXMgYWxsIG5ldyBsaW5lcyBmcm9tIHRoZSBjaGFyYWN0ZXIgdmVjdG9yIChvbmUgbGluZSBub3cpCmJpbyA8LSBwYXN0ZShiaW8sIGNvbGxhcHNlID0gIiAiKQpwcmludChiaW8pCmBgYAojIyBTZW50ZW5jZSBhbmQgV29yZCBBbm5vdGF0aW9ucwoKYGBge3J9CiMgY2hhbmdlcyB0aGUgY2hhcmFjdGVyIHZlY3RvciB0byBhIHN0cmluZyBvYmplY3QKYmlvIDwtIGFzLlN0cmluZyhiaW8pCmBgYApgYGB7cn0KIyBBbm5vdGF0b3JzIGNyZWF0ZWQgZnJvbSBBbm5vdGF0aW9uIGZ1bmN0aW9ucwojIEFubm90YXRvcnMgc2F2ZWQgdG8gdmFyaWFibGVzCiMgd29yZCBhbm5vdGF0b3IKd29yZF9hbm4gPC0gTWF4ZW50X1dvcmRfVG9rZW5fQW5ub3RhdG9yKCkKIyBzZW50ZW5jZSBhbm5vdGF0b3IKc2VudF9hbm4gPC0gTWF4ZW50X1NlbnRfVG9rZW5fQW5ub3RhdG9yKCkKYGBgCgpgYGB7cn0KIyBhcHBseSB3b3JkIGFuZCBzZW50ZW5jZSBhbm5vdGF0b3JzIHRvIGJpbyBzdHJpbmcgb2JqZWN0CmJpb19hbm5vdGF0aW9ucyA8LSBhbm5vdGF0ZShiaW8sIGxpc3Qoc2VudF9hbm4sIHdvcmRfYW5uKSkKYGBgCgpgYGB7cn0KIyBpbmZvcm1hdGlvbiBhYm91dCBiaW9fYW5ub3RhdGlvbnMKY2xhc3MoYmlvX2Fubm90YXRpb25zKQpgYGAKCmBgYHtyfQojIFRoZSBmaXJzdCA2IGxpbmVzIG9mIGJpb19hbm5vdGF0aW9ucwpoZWFkKGJpb19hbm5vdGF0aW9ucykKYGBgCgoKQXNzb2NpYXRlZCBtZXRhZGF0YSB1c2luZyBtZXRhPSBhcmd1bWVudAoKYGBge3J9CiMgQW5ub3RhdGVkUGxhaW5UZXh0RG9jdW1lbnQgLSBjb21iaW5pbmcgdGhlIGRvY3VtZW50IGFuZCB0aGUgYW5ub3RhdGlvbnMKYmlvX2RvYyA8LSBBbm5vdGF0ZWRQbGFpblRleHREb2N1bWVudChiaW8sIGJpb19hbm5vdGF0aW9ucykKYGBgClZpZXcoYmlvX2RvYykgZG9lcyBub3QgcmV2ZWFsIG11Y2gKCmBgYHtyfQojIHRvIGdldCB0aGUgc2VudGVuY2VzIChidXQganVzdCB0aGUgZmlyc3QgdHdvKSBzZXBhcmF0ZWQgaW50byB3b3JkcyBhbmQgcHVuY3R1YXRpb24Kc2VudHMoYmlvX2RvYykgJT4lIGhlYWQoMikKYGBgCgpgYGB7cn0KIyB0aGUgZmlyc3QgMTAgd29yZHMgaW4gYmlvX2RvYwp3b3JkcyhiaW9fZG9jKSAlPiUgaGVhZCgxMCkKYGBgCgojIyBBbm5vdGF0aW9uIHBlb3BsZSBhbmQgcGxhY2VzCgp0ZWNobmlxdWU6IG5hbWVkIGVudGl0eSByZWNvZ25pdGlvbiAoTkVSKSAKCmBgYHtyfQojIFRoZXNlIGJlbG93IGFyZSBhbGwgZnVuY3Rpb25zIHRvIGdldCBwZW9wbGUsIGxvY2F0aW9ucywgYW5kIG9yZ2FuaXphdGlvbiB+IGN1cmlvdXMgaG93IHRoZSBmdW5jdGlvbiBpcyBzZXQgdXAgZm9yICJvcmdhbml6YXRpb24iCnBlcnNvbl9hbm4gPC0gTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9ICJwZXJzb24iKQpsb2NhdGlvbl9hbm4gPC0gTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9ICJsb2NhdGlvbiIpCm9yZ2FuaXphdGlvbl9hbm4gPC0gTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9ICJvcmdhbml6YXRpb24iKQpgYGAKCmBgYHtyfQojIGNyZWF0aW5nIGFuIGFubm90YXRlZCBwbGFpbiB0ZXh0IGRvY3VtZW50IAojIHRoaXMgbGluZSBjb21iaW5lcyBhbGwgb2YgdGhlIGFubm90YXRvcnMgaW50byBvbmUgbGlzdCAvIHZhcmlhYmxlCnBpcGVsaW5lIDwtIGxpc3Qoc2VudF9hbm4sCiAgICAgICAgICAgICAgICAgd29yZF9hbm4sCiAgICAgICAgICAgICAgICAgcGVyc29uX2FubiwKICAgICAgICAgICAgICAgICBsb2NhdGlvbl9hbm4sCiAgICAgICAgICAgICAgICAgb3JnYW5pemF0aW9uX2FubikKIyBiaW9fYW5ub3RhdGlvbnMgPC0gYXBwbGllcyBhbGwgYW5ub3RhdG9ycyB0byBzdHJpbmcgb2JqZWN0CmJpb19hbm5vdGF0aW9ucyA8LSBhbm5vdGF0ZShiaW8sIHBpcGVsaW5lKQojIGJpb19kb2MgY3JlYXRpbmcgYW4gYW5ub3RhdGVkIHBsYWluIHRleHQgZG9jdW1lbnQgCmJpb19kb2MgPC0gQW5ub3RhdGVkUGxhaW5UZXh0RG9jdW1lbnQoYmlvLCBiaW9fYW5ub3RhdGlvbnMpCmBgYAoKYGBge3J9CiMgZWFzeSBmdW5jdGlvbiBmb3IgZXh0cmFjdGluZyBlbnRpdGllcyBmcm9tIGFuIEFubm90YXRlZCBQbGFpbiBUZXh0IERvY3VtZW50ICh3ZSB3aWxsIHVzZSB0aGlzIGluIHRoZSBuZXh0IGNvZGUgY2h1bmspCmVudGl0aWVzIDwtIGZ1bmN0aW9uKGRvYywga2luZCkgewogIHMgPC0gZG9jJGNvbnRlbnQKICBhIDwtIGFubm90YXRpb24oZG9jKSAKICAjb3JpZ2luYWxseSBhIDwtIGFubm90YXRpb25zKGRvYylbWzFdXQogIGlmKGhhc0FyZyhraW5kKSkgewogICAgayA8LSBzYXBwbHkoYSRmZWF0dXJlcywgYFtbYCwgImtpbmQiKQogICAgc1thW2sgPT0ga2luZF1dCiAgfSBlbHNlIHsKICAgIHNbYVthJHR5cGUgPT0gImVudGl0eSJdXQogIH0KfQpgYGAKCmBgYHtyfQojIHVzZSBlbnRpdGllcyBmdW5jdGlvbiBmcm9tIHRoZSBwcmV2aW91cyBjb2RlIGNodW5rCiMgc2VwYXJhdGluZyBvdXQgInBlcnNvbiIgZW50aXR5CmVudGl0aWVzKGJpb19kb2MsIGtpbmQgPSAicGVyc29uIikKYGBgCl4gb3JpZ2luYWxseSB0aGlzIGxpbmUgZGlkIG5vdCB3b3JrIChvdXRwdXQ6IGNoYXJhY3RlcigwKSkgYW5kIHRoZXJlIHdlcmUgYSBjb3VwbGUgb2YgZXJyb3JzIHdpdGhpbiB0aGUgb3JpZ2luYWwgZnVuY3Rpb24gCi0gYW5ub3RhdGlvbnMoZG9jKSBpcyBub3QgYSBmdW5jdGlvbgogIEkgZm91bmQgdGhpcyBvdXQgdGhyb3VnaCA/YW5ub3RhdGlvbiBpbiB0aGUgY29uc29sZQotIGFubm90YXRpb24oZG9jKVtbMV1dIGFsc28gZmluZHMgbm90aGluZwogIGluIGNvbXBhcmlzb24gd2l0aCB0aGUgcmVzdWx0cyB0aGF0IHlvdSBmaW5kIGluIHRoZSB0dXRvcmlhbCwgSSBjaGVja2VkIHRoZSBvdXRwdXQgb2YgYW5ub3RhdGlvbihiaW9fZG9jKSB3aGljaCBnaXZlcyBhIGxvbmcgbGlzdCBhbmQgYXQgdGhlIGVuZCwgc2hvd3MgdGhlIGtpbmQ9IHBlb3BsZSwgbG9jYXRpb24sIGFuZCBvcmdhbml6YXRpb24gKHdoaWNoIGlzIHN1cmVseSB3aGF0IHdlIGFyZSBsb29raW5nIGZvcikKYGBge3J9CiMgc2hvd3MgdGhlIGFubm90YXRpb25zIG9mIHRoZSBhbm5vdGF0ZWQgcGxhaW4gdGV4dCBkb2N1bWVudAphbm5vdGF0aW9uKGJpb19kb2MpCmBgYAogIApBbmQgaWYgeW91IHN0aWNrIFtbMV1dICBhdCB0aGUgZW5kIG9mIHRoYXQgY29tbWFuZCwgaXQgb25seSB0YWtlcyB0aGUgZmlyc3QgbGluZSBvZiB0aGUgYW5ub3RhdGlvbnMgbGlzdCAod2hpY2ggZG9lcyBub3QgaGF2ZSBraW5kID0gcGVyc29uLCBsb2NhdGlvbiwgb3JnYW5pemF0aW9uKQpgYGB7cn0KYW5ub3RhdGlvbihiaW9fZG9jKVtbMV1dCmBgYCAgCgpgYGB7cn0KIyBleHRyYWN0ZWQgbG9jYXRpb25zIGZyb20gdGhlIGJpb19kb2MgdmFyaWFibGUKZW50aXRpZXMoYmlvX2RvYywga2luZCA9ICJsb2NhdGlvbiIpCmBgYAoKYGBge3J9CiMgZXh0cmFjdGVkIG9yZ2FuaXphdGlvbnMgZnJvbSB0aGUgYmlvX2RvYyB2YXJpYWJsZQplbnRpdGllcyhiaW9fZG9jLCBraW5kID0gIm9yZ2FuaXphdGlvbiIpCmBgYAoKIyBOYW1lZCBFbnRpdHkgUmVjb2duaXRpb24gaW4gYSBzbWFsbCBjb3JwdXMKCmBgYHtyfQojIGdldHMgYWxsIG9mIHRoZSBmaWxlbmFtZXMgdXNpbmcgdGhlIGdsb2IgbmFtaW5nIGNvbnZlbnRpb25zICoudHh0CmZpbGVuYW1lcyA8LSBTeXMuZ2xvYigiZGF0YS9pdGluZXJhbnRzLyoudHh0IikKZmlsZW5hbWVzCmBgYAoKYGBge3J9CiMgbmFtZXMgYXNzaWduaW5nIHRvIHRoZSBsaXN0IChjbGVhbiB1cCkKdGV4dHMgPC0gZmlsZW5hbWVzICU+JQogIGxhcHBseShyZWFkTGluZXMpICU+JQogIGxhcHBseShwYXN0ZTAsIGNvbGxhcHNlID0gIiAiKSAlPiUKICBsYXBwbHkoYXMuU3RyaW5nKQoKbmFtZXModGV4dHMpIDwtIGJhc2VuYW1lKGZpbGVuYW1lcykKCnN0cih0ZXh0cywgbWF4LmxldmVsID0gMSkKYGBgCgpgYGB7cn0KIyBhIGZ1bmN0aW9uIHRoYXQgYW5ub3RhdGVzIHRleHQgYW5kIHRoZW4gY3JlYXRlcyBhIEFubm90YXRlZFBsYWluVGV4dERvY3VtZW50CmFubm90YXRlX2VudGl0aWVzIDwtIGZ1bmN0aW9uKGRvYywgYW5ub3RhdGlvbl9waXBlbGluZSkgewogIHByaW50KCJFcnIiKQogIGFubm90YXRpb25zIDwtIGFubm90YXRlKGRvYywgYW5ub3RhdGlvbl9waXBlbGluZSkKICBwcmludCgiZWVyMiIpCiAgQW5ub3RhdGVkUGxhaW5UZXh0RG9jdW1lbnQoZG9jLCBhbm5vdGF0aW9ucykKfQpgYGAKCmBgYHtyfQojIGNyZWF0ZXMgYSBsaXN0IG9mIHRoZSBkaWZmZXJlbnQgYW5ub3RhdG9yczogd29yZCwgc2VudGVuY2UsIHBlcnNvbiwgbG9jYXRpb24gCml0aW5lcmFudHNfcGlwZWxpbmUgPC0gbGlzdCgKICBNYXhlbnRfU2VudF9Ub2tlbl9Bbm5vdGF0b3IoKSwKICBNYXhlbnRfV29yZF9Ub2tlbl9Bbm5vdGF0b3IoKSwKICBNYXhlbnRfRW50aXR5X0Fubm90YXRvcihraW5kID0gInBlcnNvbiIpLAogIE1heGVudF9FbnRpdHlfQW5ub3RhdG9yKGtpbmQgPSAibG9jYXRpb24iKQopCmBgYApCZWxvdyAtIGRvIG5vdCBydW4KYGBge3J9CnRleHRzX2Fubm90YXRlZCA8LSB0ZXh0cyAlPiUKICBsYXBwbHkoYW5ub3RhdGVfZW50aXRpZXMsIGl0aW5lcmFudHNfcGlwZWxpbmUpCmBgYAoKYGBge3J9CnBsYWNlcyA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gImxvY2F0aW9uIikKCnBlb3BsZSA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gInBlcnNvbiIpCmBgYAoKYGBge3J9CnBsYWNlcyAlPiUKICBzYXBwbHkobGVuZ3RoKQpgYGAKCmBgYHtyfQpwbGFjZXMgJT4lCiAgbGFwcGx5KHVuaXF1ZSkgJT4lCiAgc2FwcGx5KGxlbmd0aCkKYGBgCgpgYGB7cn0KcGVvcGxlICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CnBlb3BsZSAlPiUKICBsYXBwbHkodW5pcXVlKSAlPiUKICBzYXBwbHkobGVuZ3RoKQpgYGAKCmBgYHtyfQpsaWJyYXJ5KGdnbWFwKQpgYGAKCmBgYHtyfQphbGxfcGxhY2VzIDwtIHVuaW9uKHBsYWNlc1tbInByYXR0LXBhcmxleS50eHQiXV0sIHBsYWNlc1tbImNhcnR3cmlnaHQtcGV0ZXIudHh0Il1dKSAlPiUgdW5pb24ocGxhY2VzW1sibGVlLWphcmVuYS50eHQiXV0pCmBgYAoK</div>
 
 
 

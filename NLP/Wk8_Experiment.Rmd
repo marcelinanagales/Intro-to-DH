@@ -27,10 +27,209 @@ print(bio)
 ```
 
 ```{r}
+# This removes all new lines from the character vector (one line now)
 bio <- paste(bio, collapse = " ")
 print(bio)
 ```
+## Sentence and Word Annotations
 
 ```{r}
+# changes the character vector to a string object
 bio <- as.String(bio)
 ```
+```{r}
+# Annotators created from Annotation functions
+# Annotators saved to variables
+# word annotator
+word_ann <- Maxent_Word_Token_Annotator()
+# sentence annotator
+sent_ann <- Maxent_Sent_Token_Annotator()
+```
+
+```{r}
+# apply word and sentence annotators to bio string object
+bio_annotations <- annotate(bio, list(sent_ann, word_ann))
+```
+
+```{r}
+# information about bio_annotations
+class(bio_annotations)
+```
+
+```{r}
+# The first 6 lines of bio_annotations
+head(bio_annotations)
+```
+
+
+Associated metadata using meta= argument
+
+```{r}
+# AnnotatedPlainTextDocument - combining the document and the annotations
+bio_doc <- AnnotatedPlainTextDocument(bio, bio_annotations)
+```
+View(bio_doc) does not reveal much
+
+```{r}
+# to get the sentences (but just the first two) separated into words and punctuation
+sents(bio_doc) %>% head(2)
+```
+
+```{r}
+# the first 10 words in bio_doc
+words(bio_doc) %>% head(10)
+```
+
+## Annotation people and places
+
+technique: named entity recognition (NER) 
+
+```{r}
+# These below are all functions to get people, locations, and organization ~ curious how the function is set up for "organization"
+person_ann <- Maxent_Entity_Annotator(kind = "person")
+location_ann <- Maxent_Entity_Annotator(kind = "location")
+organization_ann <- Maxent_Entity_Annotator(kind = "organization")
+```
+
+```{r}
+# creating an annotated plain text document 
+# this line combines all of the annotators into one list / variable
+pipeline <- list(sent_ann,
+                 word_ann,
+                 person_ann,
+                 location_ann,
+                 organization_ann)
+# bio_annotations <- applies all annotators to string object
+bio_annotations <- annotate(bio, pipeline)
+# bio_doc creating an annotated plain text document 
+bio_doc <- AnnotatedPlainTextDocument(bio, bio_annotations)
+```
+
+```{r}
+# easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
+entities <- function(doc, kind) {
+  s <- doc$content
+  a <- annotation(doc) 
+  #originally a <- annotations(doc)[[1]]
+  if(hasArg(kind)) {
+    k <- sapply(a$features, `[[`, "kind")
+    s[a[k == kind]]
+  } else {
+    s[a[a$type == "entity"]]
+  }
+}
+```
+
+```{r}
+# use entities function from the previous code chunk
+# separating out "person" entity
+entities(bio_doc, kind = "person")
+```
+^ originally this line did not work (output: character(0)) and there were a couple of errors within the original function 
+- annotations(doc) is not a function
+  I found this out through ?annotation in the console
+- annotation(doc)[[1]] also finds nothing
+  in comparison with the results that you find in the tutorial, I checked the output of annotation(bio_doc) which gives a long list and at the end, shows the kind= people, location, and organization (which is surely what we are looking for)
+```{r}
+# shows the annotations of the annotated plain text document
+annotation(bio_doc)
+```
+  
+And if you stick [[1]]  at the end of that command, it only takes the first line of the annotations list (which does not have kind = person, location, organization)
+```{r}
+annotation(bio_doc)[[1]]
+```  
+
+```{r}
+# extracted locations from the bio_doc variable
+entities(bio_doc, kind = "location")
+```
+
+```{r}
+# extracted organizations from the bio_doc variable
+entities(bio_doc, kind = "organization")
+```
+
+# Named Entity Recognition in a small corpus
+
+```{r}
+# gets all of the filenames using the glob naming conventions *.txt
+filenames <- Sys.glob("data/itinerants/*.txt")
+filenames
+```
+
+```{r}
+# names assigning to the list (clean up)
+texts <- filenames %>%
+  lapply(readLines) %>%
+  lapply(paste0, collapse = " ") %>%
+  lapply(as.String)
+
+names(texts) <- basename(filenames)
+
+str(texts, max.level = 1)
+```
+
+```{r}
+# a function that annotates text and then creates a AnnotatedPlainTextDocument
+annotate_entities <- function(doc, annotation_pipeline) {
+  print("Err")
+  annotations <- annotate(doc, annotation_pipeline)
+  print("eer2")
+  AnnotatedPlainTextDocument(doc, annotations)
+}
+```
+
+```{r}
+# creates a list of the different annotators: word, sentence, person, location 
+itinerants_pipeline <- list(
+  Maxent_Sent_Token_Annotator(),
+  Maxent_Word_Token_Annotator(),
+  Maxent_Entity_Annotator(kind = "person"),
+  Maxent_Entity_Annotator(kind = "location")
+)
+```
+Below - do not run
+```{r}
+texts_annotated <- texts %>%
+  lapply(annotate_entities, itinerants_pipeline)
+```
+
+```{r}
+places <- texts_annotated %>%
+  lapply(entities, kind = "location")
+
+people <- texts_annotated %>%
+  lapply(entities, kind = "person")
+```
+
+```{r}
+places %>%
+  sapply(length)
+```
+
+```{r}
+places %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+people %>%
+  sapply(length)
+```
+
+```{r}
+people %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+library(ggmap)
+```
+
+```{r}
+all_places <- union(places[["pratt-parley.txt"]], places[["cartwright-peter.txt"]]) %>% union(places[["lee-jarena.txt"]])
+```
+
