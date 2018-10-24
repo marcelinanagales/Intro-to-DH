@@ -15,8 +15,8 @@ library(magrittr)
 # easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
 entities <- function(doc, kind) {
   s <- doc$content
-  a <- annotation(doc) 
-  #originally a <- annotations(doc)[[1]]
+  # a <- annotations(doc) 
+  a <- annotations(doc)[[1]]
   if(hasArg(kind)) {
     k <- sapply(a$features, `[[`, "kind")
     s[a[k == kind]]
@@ -50,9 +50,7 @@ str(texts, max.level = 1)
 # a function that annotates text and then creates a AnnotatedPlainTextDocument
 annotate_entities <- function(doc, annotation_pipeline) {
   # because I was getting errors when running this function (in a future code chunk)
-  print("Err")
   annotations <- annotate(doc, annotation_pipeline)
-  print("eer2")
   AnnotatedPlainTextDocument(doc, annotations)
 }
 ```
@@ -72,8 +70,10 @@ Below - this did not run until I switched to a different laptop
 texts_annotated <- texts %>%
   lapply(annotate_entities, itinerants_pipeline)
 ```
-
+started at 10:06, finished at 10:23
 ```{r}
+# this chunk had some errors based on the modifications I've made with the code on my computer
+# so I changed it back
 places <- texts_annotated %>%
   lapply(entities, kind = "location")
 
@@ -82,32 +82,43 @@ people <- texts_annotated %>%
 ```
 
 ```{r}
+# lists the number of places per text file 
 places %>%
   sapply(length)
 ```
 
 ```{r}
+# lists the number of unique places per text file
 places %>%
   lapply(unique) %>%
   sapply(length)
 ```
 
 ```{r}
+# lists the number of people per text mentioned
 people %>%
   sapply(length)
 ```
 
 ```{r}
+# lists the number of unique people per test mentioned
 people %>%
   lapply(unique) %>%
   sapply(length)
 ```
 
 ```{r}
+# this is for the geocode() function to map out the locations mentioned in the texts
 library(ggmap)
 ```
 
 ```{r}
+# this saves all of the places from each of the texts 
 all_places <- union(places[["pratt-parley.txt"]], places[["cartwright-peter.txt"]]) %>% union(places[["lee-jarena.txt"]])
+```
+
+```{r}
+# when this runs, there are many errors. Since it is not pertinent to this, i elected not to fix the errors
+# all_places_geocoded <- geocode(all_places)
 ```
 
