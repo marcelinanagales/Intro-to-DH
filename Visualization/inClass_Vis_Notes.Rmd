@@ -1,0 +1,40 @@
+---
+title: "inClass Visualization Notebook"
+output: html_notebook
+---
+
+Concerns of rhetoric
+- ethos
+- pathos
+
+humanistic concerns
+- where is the data from
+  - data does not change effectiveness
+  
+If data visualization is a transformation of data into a more visual representation, is everything data visualization?
+
+Museums as a collection of data visualization
+- Cultural preservation without the museum outreach is its own rhetorical puzzle
+
+ggplot grammar of graphics
+- theme
+- coordinates
+- statistics
+- facets
+- geometries
+- aesthetics
+- data
+
+(bottom to top)
+
+Natural Language Processing
+
+- Computational Heavy
+
+Stanford NLP Toolkit
+- written in java
+
+Natural Language Processing Pipelines
+- Annotations
+
+list of annotations

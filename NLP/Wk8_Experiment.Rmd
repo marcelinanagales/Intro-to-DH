@@ -173,6 +173,7 @@ str(texts, max.level = 1)
 ```{r}
 # a function that annotates text and then creates a AnnotatedPlainTextDocument
 annotate_entities <- function(doc, annotation_pipeline) {
+  # because I was getting errors when running this function (in a future code chunk)
   print("Err")
   annotations <- annotate(doc, annotation_pipeline)
   print("eer2")
@@ -189,8 +190,9 @@ itinerants_pipeline <- list(
   Maxent_Entity_Annotator(kind = "location")
 )
 ```
-Below - do not run
+Below - this did not run until I switched to a different laptop
 ```{r}
+# this is suppose to take the longest because its going through 4 annotators for eachtext (of which there are 3)
 texts_annotated <- texts %>%
   lapply(annotate_entities, itinerants_pipeline)
 ```

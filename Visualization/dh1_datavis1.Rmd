@@ -1,0 +1,71 @@
+---
+title: "Data Visualization 1"
+output: html_notebook
+---
+
+ggplot2 is part of the tidyverse or can be loaded by itself
+```{r}
+library(tidyverse)
+require(dplyr)
+```
+
+Sample data
+```{r}
+# ggplot2 comes iwth a number of built-in datasets for you to try out with various plots. 
+# mpg is data on cars. diamonds is a data frame with information about 50,000 diamonds.
+# You can also use existing datasets from other packages (e.g. the famous iris dataset)
+
+diamonds
+```
+
+A basic plot is made up of a layer for data and then a layer for scales and shapes to be used
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price))
+```
+
+
+The model of layered graphics underlying ggplot2:
+!(https://blog.gtwang.org/wp-content/uploads/2016/07/ggplot-grammar-of-graphics-stack-1.png)
+
+Lets change the geometry a bit
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity))
+```
+
+
+Let's add another layer in the grammar
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price)) +
+  facet_wrap(~ clarity, nrow = 2)
+```
+
+Different geoms
+```{r}
+ggplot(data = diamonds) +
+  geom_smooth(mapping = aes(x = carat, y = price))
+# try adding linetype = clarity to the above aesthetic
+```
+
+You can combine geoms
+```{r}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
+  geom_smooth(mapping = aes(x = carat, y = price))
+```
+
+## Experiment time 
+
+```{r}
+ggplot(data = diamonds) +
+    geom_violin(mapping = aes(x = carat, y = price, color = clarity))
+```
+
+```{r}
+# This does not work - Do not run 
+ggplot(data = diamonds) +
+    geom_contour(mapping = aes(x = carat, y = price, z = x))
+```
+

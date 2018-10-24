@@ -1,0 +1,113 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(NLP)
+library(openNLP)
+library(RWeka)
+library(rJava)
+library(magrittr)
+```
+
+```{r}
+# easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
+entities <- function(doc, kind) {
+  s <- doc$content
+  a <- annotation(doc) 
+  #originally a <- annotations(doc)[[1]]
+  if(hasArg(kind)) {
+    k <- sapply(a$features, `[[`, "kind")
+    s[a[k == kind]]
+  } else {
+    s[a[a$type == "entity"]]
+  }
+}
+```
+
+# Named Entity Recognition in a small corpus
+
+```{r}
+# gets all of the filenames using the glob naming conventions *.txt
+filenames <- Sys.glob("data/itinerants/*.txt")
+filenames
+```
+
+```{r}
+# names assigning to the list (clean up)
+texts <- filenames %>%
+  lapply(readLines) %>%
+  lapply(paste0, collapse = " ") %>%
+  lapply(as.String)
+
+names(texts) <- basename(filenames)
+
+str(texts, max.level = 1)
+```
+
+```{r}
+# a function that annotates text and then creates a AnnotatedPlainTextDocument
+annotate_entities <- function(doc, annotation_pipeline) {
+  # because I was getting errors when running this function (in a future code chunk)
+  print("Err")
+  annotations <- annotate(doc, annotation_pipeline)
+  print("eer2")
+  AnnotatedPlainTextDocument(doc, annotations)
+}
+```
+
+```{r}
+# creates a list of the different annotators: word, sentence, person, location 
+itinerants_pipeline <- list(
+  Maxent_Sent_Token_Annotator(),
+  Maxent_Word_Token_Annotator(),
+  Maxent_Entity_Annotator(kind = "person"),
+  Maxent_Entity_Annotator(kind = "location")
+)
+```
+Below - this did not run until I switched to a different laptop
+```{r}
+# this is suppose to take the longest because its going through 4 annotators for eachtext (of which there are 3)
+texts_annotated <- texts %>%
+  lapply(annotate_entities, itinerants_pipeline)
+```
+
+```{r}
+places <- texts_annotated %>%
+  lapply(entities, kind = "location")
+
+people <- texts_annotated %>%
+  lapply(entities, kind = "person")
+```
+
+```{r}
+places %>%
+  sapply(length)
+```
+
+```{r}
+places %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+people %>%
+  sapply(length)
+```
+
+```{r}
+people %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+library(ggmap)
+```
+
+```{r}
+all_places <- union(places[["pratt-parley.txt"]], places[["cartwright-peter.txt"]]) %>% union(places[["lee-jarena.txt"]])
+```
+
