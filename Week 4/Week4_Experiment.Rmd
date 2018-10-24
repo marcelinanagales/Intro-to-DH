@@ -29,7 +29,7 @@ To do so, I went http://mercury.webster.edu/aleshunas/R_learning_infrastructure/
 So even thoughI tried to install a new R package, it seems that the packages dpylr and tidytext provide the same function.
 ```{r}
 library(nycflights13)
-#library(tidyverse)
+library(tidyverse)
 library(tidytext)
 library(dplyr)
 ```
@@ -134,7 +134,7 @@ filter(df, is.na(x) | x > 1)
 Find all flights
 ```{r}
 # Had an arrival delay of two or more hours
-arrDelay2 <- filter(flights, arr_delay >= 2)
+arrDelay2 <- filter(flights, arr_delay >= 120)
 ```
 
 ```{r}
@@ -154,30 +154,251 @@ filter(flights, month %in% c(7, 8, 9))
 
 ```{r}
 # Arrived more than two hours late, but didn’t leave late
-filter(flights, arr_delay > 2 & dep_delay <= 0)
+filter(flights, arr_delay > 120 & dep_delay <= 0)
 ```
 
 ```{r}
 # Were delayed by at least an hour, but made up over 30 minutes in flight
-
+filter(flights, dep_delay >= 60 & sched_arr_time - arr_time > 30)
 ```
 
 
 ```{r}
 # Departed between midnight and 6am (inclusive)
-
+filter(flights, dep_time >= 0  & dep_time <= 600)
 ```
 
 Another useful dplyr filtering helper is between(). What does it do? Can you use it to simplify the code needed to answer the previous challenges?
 
+  between() uses a upper and lower bound to note which of the list lies between these values
+  
+```{r}
+# Departed between midnight and 6am (inclusive) 
+# using between function
+filter(flights, between(dep_time, 0, 600))
+```
+
+
 How many flights have a missing dep_time? What other variables are missing? What might these rows represent?
+```{r}
+# number of flights with missing departure times 
+# this is for flights that have been cancelled
+nrow(filter(flights, is.na(dep_time)))
+```
 
 Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
+
+```{r}
+# results in 1
+# anything to the power of 0 will always be 1
+NA^0
+```
+```{r}
+# results in TRUE
+# anything with TRUE in an or statement will always be true
+NA | TRUE
+```
+```{r}
+# Since the two possibilities will either be true or false and if there is one false in an AND statement, it will always be false
+FALSE & NA
+```
+
+#### 5.3 Arrange rows with arrange()
+
+```{r}
+# Ascending in year then month and then day
+arrange(flights, year, month, day)
+```
+
+```{r}
+# desc(x) is the x column in descending order 
+arrange(flights, desc(dep_delay))
+```
+
+```{r}
+# Purpose: missing values (NA) are always sorted at the end 
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+# 2, 5, NA
+arrange(df, desc(x))
+# 5, 2, NA
+```
+
+
+##### 5.3.1 Exercises
+
+```{r}
+# how to use arrange() to sort all missing values to the start
+arrange(flights, !is.na(dep_time), dep_time)
+
+# i still don't really understand why this works. only that it does (somehow)
+# oh got it now. second parameter states is not NA in Departure time (which will sort true or false -- and false is alphabetically before true) then sorts the numbers in ascending order (because the entries with numbers are all equally true [is not NA] )
+```
+
+```{r}
+# Sort flights to find the most delayed flights. 
+# Not sure whether this means departure or arrival so I included both
+# desc because the larger the value, the bigger the delay
+arrange(flights, desc(dep_delay), desc(arr_delay))
+```
+
+```{r}
+# Find the flights that left earliest.
+# early = negative departure delay time (sort ascending)
+arrange(flights, dep_delay)
+```
+
+```{r}
+# Sort flights to find the fastest flights
+# by not overcomplicating things, fastest I assume to mean shortest air time (ascending order)
+arrange(flights, air_time)
+```
+
+```{r}
+# which flights travelled the longest
+# since we've already covered time, this I assume to mean distance (which is a column) and the longer the distance, the longer the travel (descending order)
+arrange(flights, desc(distance))
+```
+
+```{r}
+# which flights travelled the shortest
+# and the opposite from the previous chunk, ascending order for distance of the shortest flight
+arrange(flights, distance)
+```
+
+
+#### 5.4 Select columns with select()
+
+```{r}
+# selecting specific columns
+select(flights, year, month, day)
+```
+
+```{r}
+# select using : which means all columns in between
+select(flights, year:day)
+```
+
+```{r}
+# select all columns except for those specified (-)
+select(flights, -(year:day))
+```
+
+helper functions
+
+starts_with("abc"): matches names that begin with “abc”.
+
+ends_with("xyz"): matches names that end with “xyz”.
+
+contains("ijk"): matches names that contain “ijk”.
+
+matches("(.)\\1"): selects variables that match a regular expression. This one matches any variables that contain repeated characters. You’ll learn more about regular expressions in strings.
+
+num_range("x", 1:3): matches x1, x2 and x3.
+
+select() has rename capabilities but its finicky at best, just use rename() instead
+
+```{r}
+rename(flights, tail_num = tailnum)
+```
+
+
+##### 5.4.1 Exercises
+
+```{r}
+# select dep_time, dep_delay, arr_time, and arr_delay from flights.
+select(flights, dep_time, dep_delay, arr_time, arr_delay)
+select(flights, dep_time:arr_delay, -sched_dep_time, -sched_arr_time)
+
+```
+
+```{r}
+# same variable multiple times
+select(flights, year, year)
+# shows only one column
+```
+
+```{r}
+# one_of() is a select helper function for select()
+# it uses a character vector to select the columns specified in the character vector
+
+# these lines specify a character vector "vars" and select() will output a table of those variables listed in "vars"
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+select(flights, one_of(vars))
+```
+
+```{r}
+# what you think it does: if it contains TIME (case sensitive or at the beginning of the column name) it will keep that column
+
+# what it actually does: if it contains time anywhere (case insensitive) in the column name it will keep that column
+select(flights, contains("TIME"))
+```
+
+```{r}
+# to change how select deals with the case default
+select(flights, starts_with("TIME"))
+
+# This line will be case sensitive - but it results in an error because there is no TIME column
+# select(flights, match("TIME"))
+```
+
+#### 5.5 Add new variables with mutate()
+
+mutate() always adds new columns at the end of your dataset 
+see all the columns is View()
+
+```{r}
+# flights_sml is a subset of flights that has some of the variables from flights (from year to day // including month, all columns that end with delay, distance, and airtime)
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+
+# adds 2 cols?; gain and speed
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+```
+
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+#### 5.5 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
+
+#### 5.5 filter rows with filter()
+
+##### 5.5.1 filter rows with filter()
 
 
 ## Text Mining with R
 
 ### Ch 2: Sentient Analysis with tidy Data
+
+#### 2.1 The sentiments dataset
+
+```{r}
+sentiments
+```
+
 
 ### Ch 3: Analyzing word and document frequency: tf-idf
 
