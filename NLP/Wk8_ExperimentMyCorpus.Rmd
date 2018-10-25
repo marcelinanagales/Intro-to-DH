@@ -1,0 +1,155 @@
+---
+title: "NLP with My Corpus"
+output: html_notebook
+---
+# necessary libraries
+```{r}
+library(dplyr)
+```
+
+
+```{r}
+library(NLP)
+library(openNLP)
+library(RWeka)
+library(rJava)
+library(magrittr)
+```
+Note: Look into this to better clean up corpus: https://cran.r-project.org/web/packages/corpus/vignettes/corpus.html
+```{r}
+# easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
+entities <- function(doc, kind) {
+  s <- doc$content
+  # a <- annotations(doc) 
+  a <- annotations(doc)[[1]]
+  if(hasArg(kind)) {
+    k <- sapply(a$features, `[[`, "kind")
+    s[a[k == kind]]
+  } else {
+    s[a[a$type == "entity"]]
+  }
+}
+```
+
+# Named Entity Recognition in a small corpus
+
+```{r}
+# gets the rds
+detective_corpus <- readRDS("~/Downloads/Intro-to-DH/Week1_Final/detective.rds")
+```
+
+```{r}
+# gives a new column newtext that has a 0 when the title name changes
+detective_corpus %$%
+  {title == lag(title, n = 1)} %>%
+  as.numeric() %>%
+  {.} -> detective_corpus$newtext
+```
+
+```{r}
+# getting all unique titles
+distinct_title = detective_corpus %>% distinct(title)
+test2 <- as.character(distinct_title)
+```
+
+
+```{r}
+# names assigning to the list (clean up)
+texts <- detective_corpus
+  lapply(paste0, collapse = " ") %>%
+  lapply(as.String)
+
+names(texts) <- basename(test)
+
+str(texts, max.level = 1)
+```
+
+```{r}
+# the starting indices for each individual books
+which(detective_corpus$newtext == 0)
+```
+```{r}
+# make a dataframe (to test) 
+testing <- data.frame(matrix(NA, nrow = length(which(detective_corpus$newtext == 0)), ncol = 2))
+```
+
+```{r}
+
+testing[1,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = " "))
+```
+
+```{r}
+testing[2,2] = trimws(paste0(detective_corpus$text[12:12621], collapse = " "))
+testing[3,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = " "))
+```
+
+```{r}
+names(testing) <- basename(distinct_title)
+```
+
+
+```{r}
+# a function that annotates text and then creates a AnnotatedPlainTextDocument
+annotate_entities <- function(doc, annotation_pipeline) {
+  # because I was getting errors when running this function (in a future code chunk)
+  annotations <- annotate(doc, annotation_pipeline)
+  AnnotatedPlainTextDocument(doc, annotations)
+}
+```
+
+```{r}
+# creates a list of the different annotators: word, sentence, person, location 
+itinerants_pipeline <- list(
+  Maxent_Sent_Token_Annotator(),
+  Maxent_Word_Token_Annotator(),
+  Maxent_Entity_Annotator(kind = "person"),
+  Maxent_Entity_Annotator(kind = "location")
+)
+```
+Below - this did not run until I switched to a different laptop
+```{r}
+# this is suppose to take the longest because its going through 4 annotators for eachtext (of which there are 3)
+texts_annotated <- texts %>%
+  lapply(annotate_entities, itinerants_pipeline)
+```
+started at 10:06, finished at 10:23
+```{r}
+# this chunk had some errors based on the modifications I've made with the code on my computer
+# so I changed it back
+places <- texts_annotated %>%
+  lapply(entities, kind = "location")
+
+people <- texts_annotated %>%
+  lapply(entities, kind = "person")
+```
+
+```{r}
+# lists the number of places per text file 
+places %>%
+  sapply(length)
+```
+
+```{r}
+# lists the number of unique places per text file
+places %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+# lists the number of people per text mentioned
+people %>%
+  sapply(length)
+```
+
+```{r}
+# lists the number of unique people per test mentioned
+people %>%
+  lapply(unique) %>%
+  sapply(length)
+```
+
+```{r}
+# this is for the geocode() function to map out the locations mentioned in the texts
+library(ggmap)
+```
