@@ -180,39 +180,12 @@ $(document).ready(function () {
 <h1>necessary libraries</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
-<pre class="r"><code>library(dplyr)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
-<pre><code>
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShOTFApXG5saWJyYXJ5KG9wZW5OTFApXG5saWJyYXJ5KFJXZWthKVxuYGBgIn0= -->
-<pre class="r"><code>library(NLP)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmxpYnJhcnkoTkxQKVxubGlicmFyeShvcGVuTkxQKVxubGlicmFyeShSV2VrYSlcbmxpYnJhcnkockphdmEpXG5saWJyYXJ5KG1hZ3JpdHRyKVxuYGBgIn0= -->
+<pre class="r"><code>library(dplyr)
+library(NLP)
 library(openNLP)
-library(RWeka)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV0FSTklORzogQW4gaWxsZWdhbCByZWZsZWN0aXZlIGFjY2VzcyBvcGVyYXRpb24gaGFzIG9jY3VycmVkXG5XQVJOSU5HOiBJbGxlZ2FsIHJlZmxlY3RpdmUgYWNjZXNzIGJ5IHdla2EuY29yZS5XZWthUGFja2FnZUNsYXNzTG9hZGVyTWFuYWdlciAoZmlsZTovaG9tZS9tYXJjZWxpbmEvUi94ODZfNjQtcGMtbGludXgtZ251LWxpYnJhcnkvMy41L1JXZWthamFycy9qYXZhL3dla2EuamFyKSB0byBtZXRob2QgamF2YS5sYW5nLkNsYXNzTG9hZGVyLmRlZmluZUNsYXNzKGphdmEubGFuZy5TdHJpbmcsYnl0ZVtdLGludCxpbnQsamF2YS5zZWN1cml0eS5Qcm90ZWN0aW9uRG9tYWluKVxuV0FSTklORzogUGxlYXNlIGNvbnNpZGVyIHJlcG9ydGluZyB0aGlzIHRvIHRoZSBtYWludGFpbmVycyBvZiB3ZWthLmNvcmUuV2VrYVBhY2thZ2VDbGFzc0xvYWRlck1hbmFnZXJcbldBUk5JTkc6IFVzZSAtLWlsbGVnYWwtYWNjZXNzPXdhcm4gdG8gZW5hYmxlIHdhcm5pbmdzIG9mIGZ1cnRoZXIgaWxsZWdhbCByZWZsZWN0aXZlIGFjY2VzcyBvcGVyYXRpb25zXG5XQVJOSU5HOiBBbGwgaWxsZWdhbCBhY2Nlc3Mgb3BlcmF0aW9ucyB3aWxsIGJlIGRlbmllZCBpbiBhIGZ1dHVyZSByZWxlYXNlXG4ifQ== -->
-<pre><code>WARNING: An illegal reflective access operation has occurred
-WARNING: Illegal reflective access by weka.core.WekaPackageClassLoaderManager (file:/home/marcelina/R/x86_64-pc-linux-gnu-library/3.5/RWekajars/java/weka.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
-WARNING: Please consider reporting this to the maintainers of weka.core.WekaPackageClassLoaderManager
-WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
-WARNING: All illegal access operations will be denied in a future release</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShySmF2YSlcbmxpYnJhcnkobWFncml0dHIpXG5gYGAifQ== -->
-<pre class="r"><code>library(rJava)
+library(RWeka)
+library(rJava)
 library(magrittr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -220,12 +193,12 @@ library(magrittr)</code></pre>
 <p>Note: Look into this to better clean up corpus: <a href="https://cran.r-project.org/web/packages/corpus/vignettes/corpus.html" class="uri">https://cran.r-project.org/web/packages/corpus/vignettes/corpus.html</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBlYXN5IGZ1bmN0aW9uIGZvciBleHRyYWN0aW5nIGVudGl0aWVzIGZyb20gYW4gQW5ub3RhdGVkIFBsYWluIFRleHQgRG9jdW1lbnQgKHdlIHdpbGwgdXNlIHRoaXMgaW4gdGhlIG5leHQgY29kZSBjaHVuaylcbmVudGl0aWVzIDwtIGZ1bmN0aW9uKGRvYywga2luZCkge1xuICBzIDwtIGRvYyRjb250ZW50XG4gICMgYSA8LSBhbm5vdGF0aW9ucyhkb2MpIFxuICBhIDwtIGFubm90YXRpb25zKGRvYylbWzFdXVxuICBpZihoYXNBcmcoa2luZCkpIHtcbiAgICBrIDwtIHNhcHBseShhJGZlYXR1cmVzLCBgW1tgLCBcImtpbmRcIilcbiAgICBzW2FbayA9PSBraW5kXV1cbiAgfSBlbHNlIHtcbiAgICBzW2FbYSR0eXBlID09IFwiZW50aXR5XCJdXVxuICB9XG59XG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBlYXN5IGZ1bmN0aW9uIGZvciBleHRyYWN0aW5nIGVudGl0aWVzIGZyb20gYW4gQW5ub3RhdGVkIFBsYWluIFRleHQgRG9jdW1lbnQgKHdlIHdpbGwgdXNlIHRoaXMgaW4gdGhlIG5leHQgY29kZSBjaHVuaylcbmVudGl0aWVzIDwtIGZ1bmN0aW9uKGRvYywga2luZCkge1xuICBzIDwtIGRvYyRjb250ZW50XG4gIGEgPC0gYW5ub3RhdGlvbihkb2MpIFxuICAjIGEgPC0gYW5ub3RhdGlvbnMoZG9jKVtbMV1dXG4gIGlmKGhhc0FyZyhraW5kKSkge1xuICAgIGsgPC0gc2FwcGx5KGEkZmVhdHVyZXMsIGBbW2AsIFwia2luZFwiKVxuICAgIHNbYVtrID09IGtpbmRdXVxuICB9IGVsc2Uge1xuICAgIHNbYVthJHR5cGUgPT0gXCJlbnRpdHlcIl1dXG4gIH1cbn1cbmBgYCJ9 -->
 <pre class="r"><code># easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
 entities &lt;- function(doc, kind) {
   s &lt;- doc$content
-  # a &lt;- annotations(doc) 
-  a &lt;- annotations(doc)[[1]]
+  a &lt;- annotation(doc) 
+  # a &lt;- annotations(doc)[[1]]
   if(hasArg(kind)) {
     k &lt;- sapply(a$features, `[[`, &quot;kind&quot;)
     s[a[k == kind]]
@@ -249,8 +222,9 @@ detective_corpus &lt;- readRDS(&quot;~/Downloads/Intro-to-DH/Week1_Final/detecti
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGV0ZWN0aXZlX2NvcnB1cyAlJCVcbiAge3RpdGxlID09IGxhZyh0aXRsZSwgbiA9IDEpfSAlPiVcbiAgYXMubnVtZXJpYygpICU+JVxuICB7Ln0gLT4gZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0XG5gYGAifQ== -->
-<pre class="r"><code>detective_corpus %$%
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnaXZlcyBhIG5ldyBjb2x1bW4gbmV3dGV4dCB0aGF0IGhhcyBhIDAgd2hlbiB0aGUgdGl0bGUgbmFtZSBjaGFuZ2VzXG5kZXRlY3RpdmVfY29ycHVzICUkJVxuICB7dGl0bGUgPT0gbGFnKHRpdGxlLCBuID0gMSl9ICU+JVxuICBhcy5udW1lcmljKCkgJT4lXG4gIHsufSAtPiBkZXRlY3RpdmVfY29ycHVzJG5ld3RleHRcbmBgYCJ9 -->
+<pre class="r"><code># gives a new column newtext that has a 0 when the title name changes
+detective_corpus %$%
   {title == lag(title, n = 1)} %&gt;%
   as.numeric() %&gt;%
   {.} -&gt; detective_corpus$newtext</code></pre>
@@ -259,47 +233,72 @@ detective_corpus &lt;- readRDS(&quot;~/Downloads/Intro-to-DH/Week1_Final/detecti
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZXR0aW5nIGFsbCB1bmlxdWUgdGl0bGVzXG5kaXN0aW5jdF90aXRsZSA9IGRldGVjdGl2ZV9jb3JwdXMgJT4lIGRpc3RpbmN0KHRpdGxlKVxudGVzdDIgPC0gYXMuY2hhcmFjdGVyKGRpc3RpbmN0X3RpdGxlKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZXR0aW5nIGFsbCB1bmlxdWUgdGl0bGVzXG50aXRsZXMgPC0gZGV0ZWN0aXZlX2NvcnB1cyAlPiUgcHVsbCh0aXRsZSlcbmRpc3RpbmN0X3RpdGxlIDwtIHVuaXF1ZSh0aXRsZXMpXG5gYGAifQ== -->
 <pre class="r"><code># getting all unique titles
-distinct_title = detective_corpus %&gt;% distinct(title)
-test2 &lt;- as.character(distinct_title)</code></pre>
+titles &lt;- detective_corpus %&gt;% pull(title)
+distinct_title &lt;- unique(titles)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBuYW1lcyBhc3NpZ25pbmcgdG8gdGhlIGxpc3QgKGNsZWFuIHVwKVxudGV4dHMgPC0gZGV0ZWN0aXZlX2NvcnB1c1xuICBsYXBwbHkocGFzdGUwLCBjb2xsYXBzZSA9IFwiIFwiKSAlPiVcbiAgbGFwcGx5KGFzLlN0cmluZylcbmBgYCJ9 -->
-<pre class="r"><code># names assigning to the list (clean up)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBETyBOT1QgUlVOIH4gVFJBU0hcbiMgbmFtZXMgYXNzaWduaW5nIHRvIHRoZSBsaXN0IChjbGVhbiB1cClcbnRleHRzIDwtIGRldGVjdGl2ZV9jb3JwdXNcbiAgbGFwcGx5KHBhc3RlMCwgY29sbGFwc2UgPSBcIiBcIikgJT4lXG4gIGxhcHBseShhcy5TdHJpbmcpXG5cbm5hbWVzKHRleHRzKSA8LSBiYXNlbmFtZSh0ZXN0KVxuXG5zdHIodGV4dHMsIG1heC5sZXZlbCA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code># DO NOT RUN ~ TRASH
+# names assigning to the list (clean up)
 texts &lt;- detective_corpus
   lapply(paste0, collapse = &quot; &quot;) %&gt;%
-  lapply(as.String)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbWF0Y2guZnVuKEZVTikgOiBhcmd1bWVudCBcIkZVTlwiIGlzIG1pc3NpbmcsIHdpdGggbm8gZGVmYXVsdFxuIn0= -->
-<pre><code>Error in match.fun(FUN) : argument &quot;FUN&quot; is missing, with no default</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2hpY2goZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0ID09IDApXG5gYGAifQ== -->
-<pre class="r"><code>which(detective_corpus$newtext == 0)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAxMjYyMiAxNzM4MSAyNzIwNCAzOTg1MiA0NDM5MyA0NTY4NyA0NjU1NyA0NzQwNCA0ODczOCA0OTQ4MCA1MDM1MyA1MTQwNSA1MjE0NSA1ODk3MiA2NTc0MVxuIn0= -->
-<pre><code> [1] 12622 17381 27204 39852 44393 45687 46557 47404 48738 49480 50353 51405 52145 58972 65741</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdGluZyA8LSBkYXRhLmZyYW1lKG1hdHJpeChOQSwgbnJvdyA9IGxlbmd0aCh3aGljaChkZXRlY3RpdmVfY29ycHVzJG5ld3RleHQgPT0gMCkpLCBuY29sID0gMikpXG5gYGAifQ== -->
-<pre class="r"><code>testing &lt;- data.frame(matrix(NA, nrow = length(which(detective_corpus$newtext == 0)), ncol = 2))</code></pre>
+  lapply(as.String)
+
+names(texts) &lt;- basename(test)
+
+str(texts, max.level = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG50ZXN0aW5nWzEsMl0gPSB0cmltd3MocGFzdGUwKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFs0MzoxMjYyMV0sIGNvbGxhcHNlID0gXCIgXCIpKVxuYGBgIn0= -->
-<pre class="r"><code>
-testing[1,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = &quot; &quot;))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGUgc3RhcnRpbmcgaW5kaWNlcyBmb3IgZWFjaCBpbmRpdmlkdWFsIGJvb2tzXG5ib29rX2luZGljZXMgPC0gd2hpY2goZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0ID09IDAgfCBpcy5uYShkZXRlY3RpdmVfY29ycHVzJG5ld3RleHQpKVxuYm9va19pbmRpY2VzWzJdXG5gYGAifQ== -->
+<pre class="r"><code># the starting indices for each individual books
+book_indices &lt;- which(detective_corpus$newtext == 0 | is.na(detective_corpus$newtext))
+book_indices[2]</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEyNjIyXG4ifQ== -->
+<pre><code>[1] 12622</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYm9va19pbmRpY2VzIDwtIGFwcGVuZChib29rX2luZGljZXMsIChucm93KGRldGVjdGl2ZV9jb3JwdXMpKzEpKVxuYGBgIn0= -->
+<pre class="r"><code>book_indices &lt;- append(book_indices, (nrow(detective_corpus)+1))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBtYWtlIGEgZGF0YWZyYW1lICh0byB0ZXN0KSBcbnRlc3RpbmcgPC0gZGF0YS5mcmFtZShtYXRyaXgoTkEsIG5yb3cgPSBsZW5ndGgod2hpY2goZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0ID09IDApKSwgbmNvbCA9IDIpKVxuYGBgIn0= -->
+<pre class="r"><code># make a dataframe (to test) 
+testing &lt;- data.frame(matrix(NA, nrow = length(which(detective_corpus$newtext == 0)), ncol = 2))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBub3Qgd2hhdCBJIHdhbnRcbmxpdGxpc3QgPC0gbGlzdCh0cmltd3MocGFzdGUwKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFs0MzoxMjYyMV0sIGNvbGxhcHNlID0gXCIgXCIpKSwgdHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbMTI2MjI6MTczODFdLCBjb2xsYXBzZSA9IFwiIFwiKSkpXG5gYGAifQ== -->
+<pre class="r"><code># not what I want
+litlist &lt;- list(trimws(paste0(detective_corpus$text[43:12621], collapse = &quot; &quot;)), trimws(paste0(detective_corpus$text[12622:17381], collapse = &quot; &quot;)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUUkFTSFxudGVzdGluZ1sxLCAxXSA9IGRpc3RpbmN0X3RpdGxlWzEsIDFdXG5gYGAifQ== -->
+<pre class="r"><code># TRASH
+testing[1, 1] = distinct_title[1, 1]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZGlzdGluY3RfdGl0bGVbMSwgMV0gOiBpbmNvcnJlY3QgbnVtYmVyIG9mIGRpbWVuc2lvbnNcbiJ9 -->
+<pre><code>Error in distinct_title[1, 1] : incorrect number of dimensions</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -312,11 +311,85 @@ testing[3,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = &quot; 
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXModGVzdGluZykgPC0gYmFzZW5hbWUoZGlzdGluY3RfdGl0bGUpXG5gYGAifQ== -->
-<pre class="r"><code>names(testing) &lt;- basename(distinct_title)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXMuY2hhcmFjdGVyKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFsxXSlcbmBgYCJ9 -->
+<pre class="r"><code>is.character(detective_corpus$text[1])</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYmFzZW5hbWUoZGlzdGluY3RfdGl0bGUpIDogYSBjaGFyYWN0ZXIgdmVjdG9yIGFyZ3VtZW50IGV4cGVjdGVkXG4ifQ== -->
-<pre><code>Error in basename(distinct_title) : a character vector argument expected</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIDE6bGVuZ3RoKGRpc3RpbmN0X3RpdGxlKSlcbntcbiAgcHJpbnQoaSlcbiAgbGl0bGlzdFtpXSA8LSAgdHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbYm9va19pbmRpY2VzW2ldIDogYm9va19pbmRpY2VzIFtpKzFdXSwgY29sbGFwc2UgPSBcIiBcIikpXG59XG5gYGAifQ== -->
+<pre class="r"><code>for (i in 1:length(distinct_title))
+{
+  print(i)
+  litlist[i] &lt;-  trimws(paste0(detective_corpus$text[book_indices[i] : book_indices [i+1]], collapse = &quot; &quot;))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcblsxXSAyXG5bMV0gM1xuWzFdIDRcblsxXSA1XG5bMV0gNlxuWzFdIDdcblsxXSA4XG5bMV0gOVxuWzFdIDEwXG5bMV0gMTFcblsxXSAxMlxuWzFdIDEzXG5bMV0gMTRcblsxXSAxNVxuWzFdIDE2XG4ifQ== -->
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+[1] 16</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGl0bGlzdCA8LSBsaXRsaXN0ICU+JSBsYXBwbHkoYXMuU3RyaW5nKVxuYGBgIn0= -->
+<pre class="r"><code>litlist &lt;- litlist %&gt;% lapply(as.String)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0ZXN0XG5sZW5ndGgoZGlzdGluY3RfdGl0bGUpXG5gYGAifQ== -->
+<pre class="r"><code># test
+length(distinct_title)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2XG4ifQ== -->
+<pre><code>[1] 16</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXMobGl0bGlzdCkgPC0gYmFzZW5hbWUoZGlzdGluY3RfdGl0bGUpXG5zdHIobGl0bGlzdCwgbWF4LmxldmVsID0gMSlcbmBgYCJ9 -->
+<pre class="r"><code>names(litlist) &lt;- basename(distinct_title)
+str(litlist, max.level = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGlzdCBvZiAxNlxuICQgVGhlIFJldHVybiBvZiBTaGVybG9jayBIb2xtZXMgICAgICAgICAgICAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRIRSBSRVRVUk4gT0YgU0hFUkxPQ0sgSE9MTUVTLCAgQSBDb2xsZWN0aW9uIG9mIEhvbG1lcyBBZHZlbnR1cmVzICAgYnkgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgQ09OVEVOVFM6ICAgIFwifCBfX3RydW5jYXRlZF9fXG4gJCBBIFN0dWR5IGluIFNjYXJsZXQgICAgICAgICAgICAgICAgICAgICAgICAgIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiQSBTVFVEWSBJTiBTQ0FSTEVULiAgQnkgQS4gQ29uYW4gRG95bGUgIFsxXSAgICAgICAgIE9yaWdpbmFsIFRyYW5zY3JpYmVyJ3MgTm90ZTogVGhpcyBldGV4dCBpcyBwcmVwYXJlZCBkaXJlY3RsXCJ8IF9fdHJ1bmNhdGVkX19cbiAkIFRoZSBNZW1vaXJzIG9mIFNoZXJsb2NrIEhvbG1lcyAgICAgICAgICAgICAgOkNsYXNzICdTdHJpbmcnICBjaHIgXCJNRU1PSVJTIE9GIFNIRVJMT0NLIEhPTE1FUyAgYnkgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgQWR2ZW50dXJlIEkuIFNpbHZlciBCbGF6ZSAgIFxcXCJJIGFtIGFmcmFpZCwgV2F0c29uLCB0aFwifCBfX3RydW5jYXRlZF9fXG4gJCBUaGUgQWR2ZW50dXJlcyBvZiBTaGVybG9jayBIb2xtZXMgICAgICAgICAgIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiVEhFIEFEVkVOVFVSRVMgT0YgU0hFUkxPQ0sgSE9MTUVTICBieSAgU0lSIEFSVEhVUiBDT05BTiBET1lMRSAgICAgICBJLiBBIFNjYW5kYWwgaW4gQm9oZW1pYSAgIElJLiBUaGUgUmVkLWhlYWRlXCJ8IF9fdHJ1bmNhdGVkX19cbiAkIFRoZSBTaWduIG9mIHRoZSBGb3VyICAgICAgICAgICAgICAgICAgICAgICAgOkNsYXNzICdTdHJpbmcnICBjaHIgXCJUaGUgU2lnbiBvZiB0aGUgRm91ciAgIEJ5ICBTaXIgQXJ0aHVyIENvbmFuIERveWxlICAgICBDb250ZW50cyAgICAgIENoYXB0ZXIgSSAgVGhlIFNjaWVuY2Ugb2YgRGVkdWN0aW9uICBTaGVybG9cInwgX190cnVuY2F0ZWRfX1xuICQgVGhlIEFkdmVudHVyZSBvZiBXaXN0ZXJpYSBMb2RnZSAgICAgICAgICAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRoZSBBZHZlbnR1cmUgb2YgV2lzdGVyaWEgTG9kZ2UgICBieSAgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgQ09OVEVOVFMgICAgMS4gVGhlIFNpbmd1bGFyIEV4cGVyaWVuY2Ugb2YgTXIuIFwifCBfX3RydW5jYXRlZF9fXG4gJCBUaGUgQWR2ZW50dXJlIG9mIHRoZSBDYXJkYm9hcmQgQm94ICAgICAgICAgIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiVGhlIEFkdmVudHVyZSBvZiB0aGUgQ2FyZGJvYXJkIEJveCAgIEJ5ICBTaXIgQXJ0aHVyIENvbmFuIERveWxlICAgICBJbiBjaG9vc2luZyBhIGZldyB0eXBpY2FsIGNhc2VzIHdoaWNoIGlsbHVzXCJ8IF9fdHJ1bmNhdGVkX19cbiAkIFRoZSBBZHZlbnR1cmUgb2YgdGhlIFJlZCBDaXJjbGUgICAgICAgICAgICAgOkNsYXNzICdTdHJpbmcnICBjaHIgXCJUaGUgQWR2ZW50dXJlIG9mIHRoZSBSZWQgQ2lyY2xlICAgQnkgIFNpciBBcnRodXIgQ29uYW4gRG95bGUgICAgXFxcIldlbGwsIE1ycy4gV2FycmVuLCBJIGNhbm5vdCBzZWUgdGhhdCB5b3UgaGF2ZVwifCBfX3RydW5jYXRlZF9fXG4gJCBUaGUgQWR2ZW50dXJlIG9mIHRoZSBCcnVjZS1QYXJ0aW5ndG9uIFBsYW5zIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiVGhlIEFkdmVudHVyZSBvZiB0aGUgQnJ1Y2UtUGFydGluZ3RvbiBQbGFucyAgIEJ5ICBTaXIgQXJ0aHVyIENvbmFuIERveWxlICAgICBJbiB0aGUgdGhpcmQgd2VlayBvZiBOb3ZlbWJlciwgaW4gXCJ8IF9fdHJ1bmNhdGVkX19cbiAkIFRoZSBBZHZlbnR1cmUgb2YgdGhlIER5aW5nIERldGVjdGl2ZSAgICAgICAgOkNsYXNzICdTdHJpbmcnICBjaHIgXCJUaGUgQWR2ZW50dXJlIG9mIHRoZSBEeWluZyBEZXRlY3RpdmUgICBCeSAgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgTXJzLiBIdWRzb24sIHRoZSBsYW5kbGFkeSBvZiBTaGVybG9jayBIb2xcInwgX190cnVuY2F0ZWRfX1xuICQgVGhlIERpc2FwcGVhcmFuY2Ugb2YgTGFkeSBGcmFuY2VzIENhcmZheCAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRoZSBEaXNhcHBlYXJhbmNlIG9mIExhZHkgRnJhbmNlcyBDYXJmYXggICBCeSAgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgXFxcIkJ1dCB3aHkgVHVya2lzaD9cXFwiIGFza2VkIE1yLiBTaGVybG9cInwgX190cnVuY2F0ZWRfX1xuICQgVGhlIEFkdmVudHVyZSBvZiB0aGUgRGV2aWwncyBGb290ICAgICAgICAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRoZSBBZHZlbnR1cmUgb2YgdGhlIERldmlsJ3MgRm9vdCAgIEJ5ICBTaXIgQXJ0aHVyIENvbmFuIERveWxlICAgICBJbiByZWNvcmRpbmcgZnJvbSB0aW1lIHRvIHRpbWUgc29tZSBvZiB0aGUgY1wifCBfX3RydW5jYXRlZF9fXG4gJCBIaXMgTGFzdCBCb3c6IEFuIEVwaWxvZ3VlIG9mIFNoZXJsb2NrIEhvbG1lczpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiSGlzIExhc3QgQm93ICBBbiBFcGlsb2d1ZSBvZiBTaGVybG9jayBIb2xtZXMgICBCeSAgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgIChQYXJ0IG9mIGEgY29sbGVjdGlvbiBvZiBzdG9yaWVzIGJ5XCJ8IF9fdHJ1bmNhdGVkX19cbiAkIFRoZSBIb3VuZCBvZiB0aGUgQmFza2VydmlsbGVzICAgICAgICAgICAgICAgOkNsYXNzICdTdHJpbmcnICBjaHIgXCJUSEUgSE9VTkQgT0YgVEhFIEJBU0tFUlZJTExFUyAgQnkgQS4gQ29uYW4gRG95bGUgICAgIENoYXB0ZXIgMS4gTXIuIFNoZXJsb2NrIEhvbG1lcyAgICBNci4gU2hlcmxvY2sgSG9sbWVzLCB3aG9cInwgX190cnVuY2F0ZWRfX1xuICQgVGhlIFZhbGxleSBvZiBGZWFyICAgICAgICAgICAgICAgICAgICAgICAgICA6Q2xhc3MgJ1N0cmluZycgIGNociBcIlRIRSBWQUxMRVkgT0YgRkVBUiAgQnkgU2lyIEFydGh1ciBDb25hbiBEb3lsZSAgICAgUGFydCAxLS1UaGUgVHJhZ2VkeSBvZiBCaXJsc3RvbmUgICAgIENoYXB0ZXIgMS0tVGhlIFdhcm5pbmcgIFwifCBfX3RydW5jYXRlZF9fXG4gJCBUaGUgUmVkIEhvdXNlIE15c3RlcnkgICAgICAgICAgICAgICAgICAgICAgIDpDbGFzcyAnU3RyaW5nJyAgY2hyIFwiVEhFIFJFRCBIT1VTRSBNWVNURVJZICBCeSBBLiBBLiBNaWxuZSAgICAgICBUTyAgICBKT0hOIFZJTkUgTUlMTkUgICAgTVkgREVBUiBGQVRIRVIsICAgICBMaWtlIGFsbCByZWFsbHkgbmljZSBwXCJ8IF9fdHJ1bmNhdGVkX19cbiJ9 -->
+<pre><code>List of 16
+ $ The Return of Sherlock Holmes               :Class 'String'  chr &quot;THE RETURN OF SHERLOCK HOLMES,  A Collection of Holmes Adventures   by Sir Arthur Conan Doyle     CONTENTS:    &quot;| __truncated__
+ $ A Study in Scarlet                          :Class 'String'  chr &quot;A STUDY IN SCARLET.  By A. Conan Doyle  [1]         Original Transcriber's Note: This etext is prepared directl&quot;| __truncated__
+ $ The Memoirs of Sherlock Holmes              :Class 'String'  chr &quot;MEMOIRS OF SHERLOCK HOLMES  by Sir Arthur Conan Doyle     Adventure I. Silver Blaze   \&quot;I am afraid, Watson, th&quot;| __truncated__
+ $ The Adventures of Sherlock Holmes           :Class 'String'  chr &quot;THE ADVENTURES OF SHERLOCK HOLMES  by  SIR ARTHUR CONAN DOYLE       I. A Scandal in Bohemia   II. The Red-heade&quot;| __truncated__
+ $ The Sign of the Four                        :Class 'String'  chr &quot;The Sign of the Four   By  Sir Arthur Conan Doyle     Contents      Chapter I  The Science of Deduction  Sherlo&quot;| __truncated__
+ $ The Adventure of Wisteria Lodge             :Class 'String'  chr &quot;The Adventure of Wisteria Lodge   by  Sir Arthur Conan Doyle     CONTENTS    1. The Singular Experience of Mr. &quot;| __truncated__
+ $ The Adventure of the Cardboard Box          :Class 'String'  chr &quot;The Adventure of the Cardboard Box   By  Sir Arthur Conan Doyle     In choosing a few typical cases which illus&quot;| __truncated__
+ $ The Adventure of the Red Circle             :Class 'String'  chr &quot;The Adventure of the Red Circle   By  Sir Arthur Conan Doyle    \&quot;Well, Mrs. Warren, I cannot see that you have&quot;| __truncated__
+ $ The Adventure of the Bruce-Partington Plans :Class 'String'  chr &quot;The Adventure of the Bruce-Partington Plans   By  Sir Arthur Conan Doyle     In the third week of November, in &quot;| __truncated__
+ $ The Adventure of the Dying Detective        :Class 'String'  chr &quot;The Adventure of the Dying Detective   By  Sir Arthur Conan Doyle     Mrs. Hudson, the landlady of Sherlock Hol&quot;| __truncated__
+ $ The Disappearance of Lady Frances Carfax    :Class 'String'  chr &quot;The Disappearance of Lady Frances Carfax   By  Sir Arthur Conan Doyle     \&quot;But why Turkish?\&quot; asked Mr. Sherlo&quot;| __truncated__
+ $ The Adventure of the Devil's Foot           :Class 'String'  chr &quot;The Adventure of the Devil's Foot   By  Sir Arthur Conan Doyle     In recording from time to time some of the c&quot;| __truncated__
+ $ His Last Bow: An Epilogue of Sherlock Holmes:Class 'String'  chr &quot;His Last Bow  An Epilogue of Sherlock Holmes   By  Sir Arthur Conan Doyle   (Part of a collection of stories by&quot;| __truncated__
+ $ The Hound of the Baskervilles               :Class 'String'  chr &quot;THE HOUND OF THE BASKERVILLES  By A. Conan Doyle     Chapter 1. Mr. Sherlock Holmes    Mr. Sherlock Holmes, who&quot;| __truncated__
+ $ The Valley of Fear                          :Class 'String'  chr &quot;THE VALLEY OF FEAR  By Sir Arthur Conan Doyle     Part 1--The Tragedy of Birlstone     Chapter 1--The Warning  &quot;| __truncated__
+ $ The Red House Mystery                       :Class 'String'  chr &quot;THE RED HOUSE MYSTERY  By A. A. Milne       TO    JOHN VINE MILNE    MY DEAR FATHER,     Like all really nice p&quot;| __truncated__</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -348,22 +421,21 @@ itinerants_pipeline &lt;- list(
 <p>Below - this did not run until I switched to a different laptop</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGlzIGlzIHN1cHBvc2UgdG8gdGFrZSB0aGUgbG9uZ2VzdCBiZWNhdXNlIGl0cyBnb2luZyB0aHJvdWdoIDQgYW5ub3RhdG9ycyBmb3IgZWFjaHRleHQgKG9mIHdoaWNoIHRoZXJlIGFyZSAzKVxudGV4dHNfYW5ub3RhdGVkIDwtIHRleHRzICU+JVxuICBsYXBwbHkoYW5ub3RhdGVfZW50aXRpZXMsIGl0aW5lcmFudHNfcGlwZWxpbmUpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGlzIGlzIHN1cHBvc2UgdG8gdGFrZSB0aGUgbG9uZ2VzdCBiZWNhdXNlIGl0cyBnb2luZyB0aHJvdWdoIDQgYW5ub3RhdG9ycyBmb3IgZWFjaHRleHQgKG9mIHdoaWNoIHRoZXJlIGFyZSAzKVxudGV4dHNfYW5ub3RhdGVkIDwtIGxpdGxpc3QgJT4lXG4gIGxhcHBseShhbm5vdGF0ZV9lbnRpdGllcywgaXRpbmVyYW50c19waXBlbGluZSlcbmBgYCJ9 -->
 <pre class="r"><code># this is suppose to take the longest because its going through 4 annotators for eachtext (of which there are 3)
-texts_annotated &lt;- texts %&gt;%
+texts_annotated &lt;- litlist %&gt;%
   lapply(annotate_entities, itinerants_pipeline)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>started at 10:06, finished at 10:23</p>
+<p>started at 9:08, finished at</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGlzIGNodW5rIGhhZCBzb21lIGVycm9ycyBiYXNlZCBvbiB0aGUgbW9kaWZpY2F0aW9ucyBJJ3ZlIG1hZGUgd2l0aCB0aGUgY29kZSBvbiBteSBjb21wdXRlclxuIyBzbyBJIGNoYW5nZWQgaXQgYmFja1xucGxhY2VzIDwtIHRleHRzX2Fubm90YXRlZCAlPiVcbiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gXCJsb2NhdGlvblwiKVxuXG5wZW9wbGUgPC0gdGV4dHNfYW5ub3RhdGVkICU+JVxuICBsYXBwbHkoZW50aXRpZXMsIGtpbmQgPSBcInBlcnNvblwiKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGlzIGNodW5rIGhhZCBzb21lIGVycm9ycyBiYXNlZCBvbiB0aGUgbW9kaWZpY2F0aW9ucyBJJ3ZlIG1hZGUgd2l0aCB0aGUgY29kZSBvbiBteSBjb21wdXRlclxuIyBzbyBJIGNoYW5nZWQgaXQgYmFja1xucGxhY2VzIDwtIHRleHRzX2Fubm90YXRlZCAlPiVcbiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gXCJsb2NhdGlvblwiKVxucGVvcGxlIDwtIHRleHRzX2Fubm90YXRlZCAlPiVcbiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gXCJwZXJzb25cIilcbmBgYCJ9 -->
 <pre class="r"><code># this chunk had some errors based on the modifications I've made with the code on my computer
 # so I changed it back
 places &lt;- texts_annotated %&gt;%
   lapply(entities, kind = &quot;location&quot;)
-
 people &lt;- texts_annotated %&gt;%
   lapply(entities, kind = &quot;person&quot;)</code></pre>
 <!-- rnb-source-end -->
@@ -376,6 +448,40 @@ people &lt;- texts_annotated %&gt;%
 places %&gt;%
   sapply(length)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgVGhlIFJldHVybiBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDI2OCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgQSBTdHVkeSBpbiBTY2FybGV0IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxNDAgXG4gICAgICAgICAgICAgIFRoZSBNZW1vaXJzIG9mIFNoZXJsb2NrIEhvbG1lcyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMjAyIFxuICAgICAgICAgICBUaGUgQWR2ZW50dXJlcyBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDIxMiBcbiAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBTaWduIG9mIHRoZSBGb3VyIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgODcgXG4gICAgICAgICAgICAgVGhlIEFkdmVudHVyZSBvZiBXaXN0ZXJpYSBMb2RnZSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDMwIFxuICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIENhcmRib2FyZCBCb3ggXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxOCBcbiAgICAgICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBSZWQgQ2lyY2xlIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMzEgXG4gVGhlIEFkdmVudHVyZSBvZiB0aGUgQnJ1Y2UtUGFydGluZ3RvbiBQbGFucyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDQ2IFxuICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBEeWluZyBEZXRlY3RpdmUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOCBcbiAgICBUaGUgRGlzYXBwZWFyYW5jZSBvZiBMYWR5IEZyYW5jZXMgQ2FyZmF4IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNDEgXG4gICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIERldmlsJ3MgRm9vdCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDI3IFxuSGlzIExhc3QgQm93OiBBbiBFcGlsb2d1ZSBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyNiBcbiAgICAgICAgICAgICAgIFRoZSBIb3VuZCBvZiB0aGUgQmFza2VydmlsbGVzIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOTcgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBWYWxsZXkgb2YgRmVhciBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTM2IFxuICAgICAgICAgICAgICAgICAgICAgICBUaGUgUmVkIEhvdXNlIE15c3RlcnkgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA3NCBcbiJ9 -->
+<pre><code>               The Return of Sherlock Holmes 
+                                         268 
+                          A Study in Scarlet 
+                                         140 
+              The Memoirs of Sherlock Holmes 
+                                         202 
+           The Adventures of Sherlock Holmes 
+                                         212 
+                        The Sign of the Four 
+                                          87 
+             The Adventure of Wisteria Lodge 
+                                          30 
+          The Adventure of the Cardboard Box 
+                                          18 
+             The Adventure of the Red Circle 
+                                          31 
+ The Adventure of the Bruce-Partington Plans 
+                                          46 
+        The Adventure of the Dying Detective 
+                                           8 
+    The Disappearance of Lady Frances Carfax 
+                                          41 
+           The Adventure of the Devil's Foot 
+                                          27 
+His Last Bow: An Epilogue of Sherlock Holmes 
+                                          26 
+               The Hound of the Baskervilles 
+                                          97 
+                          The Valley of Fear 
+                                         136 
+                       The Red House Mystery 
+                                          74 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -386,6 +492,40 @@ places %&gt;%
   lapply(unique) %&gt;%
   sapply(length)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgVGhlIFJldHVybiBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA3NyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgQSBTdHVkeSBpbiBTY2FybGV0IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNTYgXG4gICAgICAgICAgICAgIFRoZSBNZW1vaXJzIG9mIFNoZXJsb2NrIEhvbG1lcyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDY4IFxuICAgICAgICAgICBUaGUgQWR2ZW50dXJlcyBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA5MCBcbiAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBTaWduIG9mIHRoZSBGb3VyIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNDQgXG4gICAgICAgICAgICAgVGhlIEFkdmVudHVyZSBvZiBXaXN0ZXJpYSBMb2RnZSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE3IFxuICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIENhcmRib2FyZCBCb3ggXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxMCBcbiAgICAgICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBSZWQgQ2lyY2xlIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTEgXG4gVGhlIEFkdmVudHVyZSBvZiB0aGUgQnJ1Y2UtUGFydGluZ3RvbiBQbGFucyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDIwIFxuICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBEeWluZyBEZXRlY3RpdmUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMyBcbiAgICBUaGUgRGlzYXBwZWFyYW5jZSBvZiBMYWR5IEZyYW5jZXMgQ2FyZmF4IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTYgXG4gICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIERldmlsJ3MgRm9vdCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDExIFxuSGlzIExhc3QgQm93OiBBbiBFcGlsb2d1ZSBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxNiBcbiAgICAgICAgICAgICAgIFRoZSBIb3VuZCBvZiB0aGUgQmFza2VydmlsbGVzIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMzAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBWYWxsZXkgb2YgRmVhciBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDQxIFxuICAgICAgICAgICAgICAgICAgICAgICBUaGUgUmVkIEhvdXNlIE15c3RlcnkgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxNyBcbiJ9 -->
+<pre><code>               The Return of Sherlock Holmes 
+                                          77 
+                          A Study in Scarlet 
+                                          56 
+              The Memoirs of Sherlock Holmes 
+                                          68 
+           The Adventures of Sherlock Holmes 
+                                          90 
+                        The Sign of the Four 
+                                          44 
+             The Adventure of Wisteria Lodge 
+                                          17 
+          The Adventure of the Cardboard Box 
+                                          10 
+             The Adventure of the Red Circle 
+                                          11 
+ The Adventure of the Bruce-Partington Plans 
+                                          20 
+        The Adventure of the Dying Detective 
+                                           3 
+    The Disappearance of Lady Frances Carfax 
+                                          16 
+           The Adventure of the Devil's Foot 
+                                          11 
+His Last Bow: An Epilogue of Sherlock Holmes 
+                                          16 
+               The Hound of the Baskervilles 
+                                          30 
+                          The Valley of Fear 
+                                          41 
+                       The Red House Mystery 
+                                          17 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -395,6 +535,40 @@ places %&gt;%
 people %&gt;%
   sapply(length)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgVGhlIFJldHVybiBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTE3NiBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgQSBTdHVkeSBpbiBTY2FybGV0IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyMzggXG4gICAgICAgICAgICAgIFRoZSBNZW1vaXJzIG9mIFNoZXJsb2NrIEhvbG1lcyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNjU3IFxuICAgICAgICAgICBUaGUgQWR2ZW50dXJlcyBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDg5NSBcbiAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBTaWduIG9mIHRoZSBGb3VyIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyNzMgXG4gICAgICAgICAgICAgVGhlIEFkdmVudHVyZSBvZiBXaXN0ZXJpYSBMb2RnZSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTM1IFxuICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIENhcmRib2FyZCBCb3ggXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA4NSBcbiAgICAgICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBSZWQgQ2lyY2xlIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNTAgXG4gVGhlIEFkdmVudHVyZSBvZiB0aGUgQnJ1Y2UtUGFydGluZ3RvbiBQbGFucyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDk4IFxuICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBEeWluZyBEZXRlY3RpdmUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA2NiBcbiAgICBUaGUgRGlzYXBwZWFyYW5jZSBvZiBMYWR5IEZyYW5jZXMgQ2FyZmF4IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxMDIgXG4gICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIERldmlsJ3MgRm9vdCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDgxIFxuSGlzIExhc3QgQm93OiBBbiBFcGlsb2d1ZSBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA4MCBcbiAgICAgICAgICAgICAgIFRoZSBIb3VuZCBvZiB0aGUgQmFza2VydmlsbGVzIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA1MzcgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBWYWxsZXkgb2YgRmVhciBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNDQxIFxuICAgICAgICAgICAgICAgICAgICAgICBUaGUgUmVkIEhvdXNlIE15c3RlcnkgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTE3NiBcbiJ9 -->
+<pre><code>               The Return of Sherlock Holmes 
+                                        1176 
+                          A Study in Scarlet 
+                                         238 
+              The Memoirs of Sherlock Holmes 
+                                         657 
+           The Adventures of Sherlock Holmes 
+                                         895 
+                        The Sign of the Four 
+                                         273 
+             The Adventure of Wisteria Lodge 
+                                         135 
+          The Adventure of the Cardboard Box 
+                                          85 
+             The Adventure of the Red Circle 
+                                          50 
+ The Adventure of the Bruce-Partington Plans 
+                                          98 
+        The Adventure of the Dying Detective 
+                                          66 
+    The Disappearance of Lady Frances Carfax 
+                                         102 
+           The Adventure of the Devil's Foot 
+                                          81 
+His Last Bow: An Epilogue of Sherlock Holmes 
+                                          80 
+               The Hound of the Baskervilles 
+                                         537 
+                          The Valley of Fear 
+                                         441 
+                       The Red House Mystery 
+                                        1176 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -405,18 +579,44 @@ people %&gt;%
   lapply(unique) %&gt;%
   sapply(length)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGlzIGlzIGZvciB0aGUgZ2VvY29kZSgpIGZ1bmN0aW9uIHRvIG1hcCBvdXQgdGhlIGxvY2F0aW9ucyBtZW50aW9uZWQgaW4gdGhlIHRleHRzXG5saWJyYXJ5KGdnbWFwKVxuYGBgIn0= -->
-<pre class="r"><code># this is for the geocode() function to map out the locations mentioned in the texts
-library(ggmap)</code></pre>
-<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgVGhlIFJldHVybiBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE2NSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgQSBTdHVkeSBpbiBTY2FybGV0IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNTMgXG4gICAgICAgICAgICAgIFRoZSBNZW1vaXJzIG9mIFNoZXJsb2NrIEhvbG1lcyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTI2IFxuICAgICAgICAgICBUaGUgQWR2ZW50dXJlcyBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE1NCBcbiAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBTaWduIG9mIHRoZSBGb3VyIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNjIgXG4gICAgICAgICAgICAgVGhlIEFkdmVudHVyZSBvZiBXaXN0ZXJpYSBMb2RnZSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDMzIFxuICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIENhcmRib2FyZCBCb3ggXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyNCBcbiAgICAgICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBSZWQgQ2lyY2xlIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDggXG4gVGhlIEFkdmVudHVyZSBvZiB0aGUgQnJ1Y2UtUGFydGluZ3RvbiBQbGFucyBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDIzIFxuICAgICAgICBUaGUgQWR2ZW50dXJlIG9mIHRoZSBEeWluZyBEZXRlY3RpdmUgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxNiBcbiAgICBUaGUgRGlzYXBwZWFyYW5jZSBvZiBMYWR5IEZyYW5jZXMgQ2FyZmF4IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMjMgXG4gICAgICAgICAgIFRoZSBBZHZlbnR1cmUgb2YgdGhlIERldmlsJ3MgRm9vdCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE0IFxuSGlzIExhc3QgQm93OiBBbiBFcGlsb2d1ZSBvZiBTaGVybG9jayBIb2xtZXMgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAyMyBcbiAgICAgICAgICAgICAgIFRoZSBIb3VuZCBvZiB0aGUgQmFza2VydmlsbGVzIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgNzcgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFRoZSBWYWxsZXkgb2YgRmVhciBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTA1IFxuICAgICAgICAgICAgICAgICAgICAgICBUaGUgUmVkIEhvdXNlIE15c3RlcnkgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA4NCBcbiJ9 -->
+<pre><code>               The Return of Sherlock Holmes 
+                                         165 
+                          A Study in Scarlet 
+                                          53 
+              The Memoirs of Sherlock Holmes 
+                                         126 
+           The Adventures of Sherlock Holmes 
+                                         154 
+                        The Sign of the Four 
+                                          62 
+             The Adventure of Wisteria Lodge 
+                                          33 
+          The Adventure of the Cardboard Box 
+                                          24 
+             The Adventure of the Red Circle 
+                                           8 
+ The Adventure of the Bruce-Partington Plans 
+                                          23 
+        The Adventure of the Dying Detective 
+                                          16 
+    The Disappearance of Lady Frances Carfax 
+                                          23 
+           The Adventure of the Devil's Foot 
+                                          14 
+His Last Bow: An Epilogue of Sherlock Holmes 
+                                          23 
+               The Hound of the Baskervilles 
+                                          77 
+                          The Valley of Fear 
+                                         105 
+                       The Red House Mystery 
+                                          84 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTkxQIHdpdGggTXkgQ29ycHVzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCiMgbmVjZXNzYXJ5IGxpYnJhcmllcwpgYGB7cn0KbGlicmFyeShkcGx5cikKYGBgCgoKYGBge3J9CmxpYnJhcnkoTkxQKQpsaWJyYXJ5KG9wZW5OTFApCmxpYnJhcnkoUldla2EpCmxpYnJhcnkockphdmEpCmxpYnJhcnkobWFncml0dHIpCmBgYApOb3RlOiBMb29rIGludG8gdGhpcyB0byBiZXR0ZXIgY2xlYW4gdXAgY29ycHVzOiBodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy93ZWIvcGFja2FnZXMvY29ycHVzL3ZpZ25ldHRlcy9jb3JwdXMuaHRtbApgYGB7cn0KIyBlYXN5IGZ1bmN0aW9uIGZvciBleHRyYWN0aW5nIGVudGl0aWVzIGZyb20gYW4gQW5ub3RhdGVkIFBsYWluIFRleHQgRG9jdW1lbnQgKHdlIHdpbGwgdXNlIHRoaXMgaW4gdGhlIG5leHQgY29kZSBjaHVuaykKZW50aXRpZXMgPC0gZnVuY3Rpb24oZG9jLCBraW5kKSB7CiAgcyA8LSBkb2MkY29udGVudAogICMgYSA8LSBhbm5vdGF0aW9ucyhkb2MpIAogIGEgPC0gYW5ub3RhdGlvbnMoZG9jKVtbMV1dCiAgaWYoaGFzQXJnKGtpbmQpKSB7CiAgICBrIDwtIHNhcHBseShhJGZlYXR1cmVzLCBgW1tgLCAia2luZCIpCiAgICBzW2FbayA9PSBraW5kXV0KICB9IGVsc2UgewogICAgc1thW2EkdHlwZSA9PSAiZW50aXR5Il1dCiAgfQp9CmBgYAoKIyBOYW1lZCBFbnRpdHkgUmVjb2duaXRpb24gaW4gYSBzbWFsbCBjb3JwdXMKCmBgYHtyfQojIGdldHMgdGhlIHJkcwpkZXRlY3RpdmVfY29ycHVzIDwtIHJlYWRSRFMoIn4vRG93bmxvYWRzL0ludHJvLXRvLURIL1dlZWsxX0ZpbmFsL2RldGVjdGl2ZS5yZHMiKQpgYGAKCmBgYHtyfQojIGdpdmVzIGEgbmV3IGNvbHVtbiBuZXd0ZXh0IHRoYXQgaGFzIGEgMCB3aGVuIHRoZSB0aXRsZSBuYW1lIGNoYW5nZXMKZGV0ZWN0aXZlX2NvcnB1cyAlJCUKICB7dGl0bGUgPT0gbGFnKHRpdGxlLCBuID0gMSl9ICU+JQogIGFzLm51bWVyaWMoKSAlPiUKICB7Ln0gLT4gZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0CmBgYAoKYGBge3J9CiMgZ2V0dGluZyBhbGwgdW5pcXVlIHRpdGxlcwpkaXN0aW5jdF90aXRsZSA9IGRldGVjdGl2ZV9jb3JwdXMgJT4lIGRpc3RpbmN0KHRpdGxlKQp0ZXN0MiA8LSBhcy5jaGFyYWN0ZXIoZGlzdGluY3RfdGl0bGUpCmBgYAoKCmBgYHtyfQojIG5hbWVzIGFzc2lnbmluZyB0byB0aGUgbGlzdCAoY2xlYW4gdXApCnRleHRzIDwtIGRldGVjdGl2ZV9jb3JwdXMKICBsYXBwbHkocGFzdGUwLCBjb2xsYXBzZSA9ICIgIikgJT4lCiAgbGFwcGx5KGFzLlN0cmluZykKCm5hbWVzKHRleHRzKSA8LSBiYXNlbmFtZSh0ZXN0KQoKc3RyKHRleHRzLCBtYXgubGV2ZWwgPSAxKQpgYGAKCmBgYHtyfQojIHRoZSBzdGFydGluZyBpbmRpY2VzIGZvciBlYWNoIGluZGl2aWR1YWwgYm9va3MKd2hpY2goZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0ID09IDApCmBgYApgYGB7cn0KIyBtYWtlIGEgZGF0YWZyYW1lICh0byB0ZXN0KSAKdGVzdGluZyA8LSBkYXRhLmZyYW1lKG1hdHJpeChOQSwgbnJvdyA9IGxlbmd0aCh3aGljaChkZXRlY3RpdmVfY29ycHVzJG5ld3RleHQgPT0gMCkpLCBuY29sID0gMikpCmBgYAoKYGBge3J9Cgp0ZXN0aW5nWzEsMl0gPSB0cmltd3MocGFzdGUwKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFs0MzoxMjYyMV0sIGNvbGxhcHNlID0gIiAiKSkKYGBgCgpgYGB7cn0KdGVzdGluZ1syLDJdID0gdHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbMTI6MTI2MjFdLCBjb2xsYXBzZSA9ICIgIikpCnRlc3RpbmdbMywyXSA9IHRyaW13cyhwYXN0ZTAoZGV0ZWN0aXZlX2NvcnB1cyR0ZXh0WzQzOjEyNjIxXSwgY29sbGFwc2UgPSAiICIpKQpgYGAKCmBgYHtyfQpuYW1lcyh0ZXN0aW5nKSA8LSBiYXNlbmFtZShkaXN0aW5jdF90aXRsZSkKYGBgCgoKYGBge3J9CiMgYSBmdW5jdGlvbiB0aGF0IGFubm90YXRlcyB0ZXh0IGFuZCB0aGVuIGNyZWF0ZXMgYSBBbm5vdGF0ZWRQbGFpblRleHREb2N1bWVudAphbm5vdGF0ZV9lbnRpdGllcyA8LSBmdW5jdGlvbihkb2MsIGFubm90YXRpb25fcGlwZWxpbmUpIHsKICAjIGJlY2F1c2UgSSB3YXMgZ2V0dGluZyBlcnJvcnMgd2hlbiBydW5uaW5nIHRoaXMgZnVuY3Rpb24gKGluIGEgZnV0dXJlIGNvZGUgY2h1bmspCiAgYW5ub3RhdGlvbnMgPC0gYW5ub3RhdGUoZG9jLCBhbm5vdGF0aW9uX3BpcGVsaW5lKQogIEFubm90YXRlZFBsYWluVGV4dERvY3VtZW50KGRvYywgYW5ub3RhdGlvbnMpCn0KYGBgCgpgYGB7cn0KIyBjcmVhdGVzIGEgbGlzdCBvZiB0aGUgZGlmZmVyZW50IGFubm90YXRvcnM6IHdvcmQsIHNlbnRlbmNlLCBwZXJzb24sIGxvY2F0aW9uIAppdGluZXJhbnRzX3BpcGVsaW5lIDwtIGxpc3QoCiAgTWF4ZW50X1NlbnRfVG9rZW5fQW5ub3RhdG9yKCksCiAgTWF4ZW50X1dvcmRfVG9rZW5fQW5ub3RhdG9yKCksCiAgTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9ICJwZXJzb24iKSwKICBNYXhlbnRfRW50aXR5X0Fubm90YXRvcihraW5kID0gImxvY2F0aW9uIikKKQpgYGAKQmVsb3cgLSB0aGlzIGRpZCBub3QgcnVuIHVudGlsIEkgc3dpdGNoZWQgdG8gYSBkaWZmZXJlbnQgbGFwdG9wCmBgYHtyfQojIHRoaXMgaXMgc3VwcG9zZSB0byB0YWtlIHRoZSBsb25nZXN0IGJlY2F1c2UgaXRzIGdvaW5nIHRocm91Z2ggNCBhbm5vdGF0b3JzIGZvciBlYWNodGV4dCAob2Ygd2hpY2ggdGhlcmUgYXJlIDMpCnRleHRzX2Fubm90YXRlZCA8LSB0ZXh0cyAlPiUKICBsYXBwbHkoYW5ub3RhdGVfZW50aXRpZXMsIGl0aW5lcmFudHNfcGlwZWxpbmUpCmBgYApzdGFydGVkIGF0IDEwOjA2LCBmaW5pc2hlZCBhdCAxMDoyMwpgYGB7cn0KIyB0aGlzIGNodW5rIGhhZCBzb21lIGVycm9ycyBiYXNlZCBvbiB0aGUgbW9kaWZpY2F0aW9ucyBJJ3ZlIG1hZGUgd2l0aCB0aGUgY29kZSBvbiBteSBjb21wdXRlcgojIHNvIEkgY2hhbmdlZCBpdCBiYWNrCnBsYWNlcyA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gImxvY2F0aW9uIikKCnBlb3BsZSA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gInBlcnNvbiIpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiBwbGFjZXMgcGVyIHRleHQgZmlsZSAKcGxhY2VzICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiB1bmlxdWUgcGxhY2VzIHBlciB0ZXh0IGZpbGUKcGxhY2VzICU+JQogIGxhcHBseSh1bmlxdWUpICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiBwZW9wbGUgcGVyIHRleHQgbWVudGlvbmVkCnBlb3BsZSAlPiUKICBzYXBwbHkobGVuZ3RoKQpgYGAKCmBgYHtyfQojIGxpc3RzIHRoZSBudW1iZXIgb2YgdW5pcXVlIHBlb3BsZSBwZXIgdGVzdCBtZW50aW9uZWQKcGVvcGxlICU+JQogIGxhcHBseSh1bmlxdWUpICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CiMgdGhpcyBpcyBmb3IgdGhlIGdlb2NvZGUoKSBmdW5jdGlvbiB0byBtYXAgb3V0IHRoZSBsb2NhdGlvbnMgbWVudGlvbmVkIGluIHRoZSB0ZXh0cwpsaWJyYXJ5KGdnbWFwKQpgYGA=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTkxQIHdpdGggTXkgQ29ycHVzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCiMgbmVjZXNzYXJ5IGxpYnJhcmllcwpgYGB7cn0KbGlicmFyeShkcGx5cikKbGlicmFyeShOTFApCmxpYnJhcnkob3Blbk5MUCkKbGlicmFyeShSV2VrYSkKbGlicmFyeShySmF2YSkKbGlicmFyeShtYWdyaXR0cikKYGBgCk5vdGU6IExvb2sgaW50byB0aGlzIHRvIGJldHRlciBjbGVhbiB1cCBjb3JwdXM6IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3dlYi9wYWNrYWdlcy9jb3JwdXMvdmlnbmV0dGVzL2NvcnB1cy5odG1sCmBgYHtyfQojIGVhc3kgZnVuY3Rpb24gZm9yIGV4dHJhY3RpbmcgZW50aXRpZXMgZnJvbSBhbiBBbm5vdGF0ZWQgUGxhaW4gVGV4dCBEb2N1bWVudCAod2Ugd2lsbCB1c2UgdGhpcyBpbiB0aGUgbmV4dCBjb2RlIGNodW5rKQplbnRpdGllcyA8LSBmdW5jdGlvbihkb2MsIGtpbmQpIHsKICBzIDwtIGRvYyRjb250ZW50CiAgYSA8LSBhbm5vdGF0aW9uKGRvYykgCiAgIyBhIDwtIGFubm90YXRpb25zKGRvYylbWzFdXQogIGlmKGhhc0FyZyhraW5kKSkgewogICAgayA8LSBzYXBwbHkoYSRmZWF0dXJlcywgYFtbYCwgImtpbmQiKQogICAgc1thW2sgPT0ga2luZF1dCiAgfSBlbHNlIHsKICAgIHNbYVthJHR5cGUgPT0gImVudGl0eSJdXQogIH0KfQpgYGAKCiMgTmFtZWQgRW50aXR5IFJlY29nbml0aW9uIGluIGEgc21hbGwgY29ycHVzCgpgYGB7cn0KIyBnZXRzIHRoZSByZHMKZGV0ZWN0aXZlX2NvcnB1cyA8LSByZWFkUkRTKCJ+L0Rvd25sb2Fkcy9JbnRyby10by1ESC9XZWVrMV9GaW5hbC9kZXRlY3RpdmUucmRzIikKYGBgCgpgYGB7cn0KIyBnaXZlcyBhIG5ldyBjb2x1bW4gbmV3dGV4dCB0aGF0IGhhcyBhIDAgd2hlbiB0aGUgdGl0bGUgbmFtZSBjaGFuZ2VzCmRldGVjdGl2ZV9jb3JwdXMgJSQlCiAge3RpdGxlID09IGxhZyh0aXRsZSwgbiA9IDEpfSAlPiUKICBhcy5udW1lcmljKCkgJT4lCiAgey59IC0+IGRldGVjdGl2ZV9jb3JwdXMkbmV3dGV4dApgYGAKCmBgYHtyfQojIGdldHRpbmcgYWxsIHVuaXF1ZSB0aXRsZXMKdGl0bGVzIDwtIGRldGVjdGl2ZV9jb3JwdXMgJT4lIHB1bGwodGl0bGUpCmRpc3RpbmN0X3RpdGxlIDwtIHVuaXF1ZSh0aXRsZXMpCmBgYAoKCmBgYHtyfQojIERPIE5PVCBSVU4gfiBUUkFTSAojIG5hbWVzIGFzc2lnbmluZyB0byB0aGUgbGlzdCAoY2xlYW4gdXApCnRleHRzIDwtIGRldGVjdGl2ZV9jb3JwdXMKICBsYXBwbHkocGFzdGUwLCBjb2xsYXBzZSA9ICIgIikgJT4lCiAgbGFwcGx5KGFzLlN0cmluZykKCm5hbWVzKHRleHRzKSA8LSBiYXNlbmFtZSh0ZXN0KQoKc3RyKHRleHRzLCBtYXgubGV2ZWwgPSAxKQpgYGAKCmBgYHtyfQojIHRoZSBzdGFydGluZyBpbmRpY2VzIGZvciBlYWNoIGluZGl2aWR1YWwgYm9va3MKYm9va19pbmRpY2VzIDwtIHdoaWNoKGRldGVjdGl2ZV9jb3JwdXMkbmV3dGV4dCA9PSAwIHwgaXMubmEoZGV0ZWN0aXZlX2NvcnB1cyRuZXd0ZXh0KSkKYGBgCgpgYGB7cn0KYm9va19pbmRpY2VzIDwtIGFwcGVuZChib29rX2luZGljZXMsIChucm93KGRldGVjdGl2ZV9jb3JwdXMpKzEpKQpgYGAKCmBgYHtyfQojIG1ha2UgYSBkYXRhZnJhbWUgKHRvIHRlc3QpIAp0ZXN0aW5nIDwtIGRhdGEuZnJhbWUobWF0cml4KE5BLCBucm93ID0gbGVuZ3RoKHdoaWNoKGRldGVjdGl2ZV9jb3JwdXMkbmV3dGV4dCA9PSAwKSksIG5jb2wgPSAyKSkKYGBgCgpgYGB7cn0KIyBUUkFTSApsaXRsaXN0IDwtIGxpc3QodHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbNDM6MTI2MjFdLCBjb2xsYXBzZSA9ICIgIikpLCB0cmltd3MocGFzdGUwKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFsxMjYyMjoxNzM4MV0sIGNvbGxhcHNlID0gIiAiKSkpCmBgYAoKCmBgYHtyfQojIFRSQVNICnRlc3RpbmdbMSwgMV0gPSBkaXN0aW5jdF90aXRsZVsxLCAxXQp0ZXN0aW5nWzEsMl0gPSB0cmltd3MocGFzdGUwKGRldGVjdGl2ZV9jb3JwdXMkdGV4dFs0MzoxMjYyMV0sIGNvbGxhcHNlID0gIiAiKSkKYGBgCgpgYGB7cn0KdGVzdGluZ1syLDJdID0gdHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbMTI6MTI2MjFdLCBjb2xsYXBzZSA9ICIgIikpCnRlc3RpbmdbMywyXSA9IHRyaW13cyhwYXN0ZTAoZGV0ZWN0aXZlX2NvcnB1cyR0ZXh0WzQzOjEyNjIxXSwgY29sbGFwc2UgPSAiICIpKQpgYGAKCmBgYHtyfQppcy5jaGFyYWN0ZXIoZGV0ZWN0aXZlX2NvcnB1cyR0ZXh0WzFdKQpgYGAKCmBgYHtyfQpmb3IgKGkgaW4gMTpsZW5ndGgoZGlzdGluY3RfdGl0bGUpKQp7CiAgbGl0bGlzdFtpXSA8LSAgdHJpbXdzKHBhc3RlMChkZXRlY3RpdmVfY29ycHVzJHRleHRbYm9va19pbmRpY2VzW2ldIDogYm9va19pbmRpY2VzIFtpKzFdXSwgY29sbGFwc2UgPSAiICIpKQp9CmBgYAoKYGBge3J9CmxpdGxpc3QgPC0gbGl0bGlzdCAlPiUgbGFwcGx5KGFzLlN0cmluZykKYGBgCgpgYGB7cn0KIyB0ZXN0Cmxlbmd0aChkaXN0aW5jdF90aXRsZSkKYGBgCgoKYGBge3J9Cm5hbWVzKGxpdGxpc3QpIDwtIGJhc2VuYW1lKGRpc3RpbmN0X3RpdGxlKQoKc3RyKGxpdGxpc3QsIG1heC5sZXZlbCA9IDEpCmBgYAoKCmBgYHtyfQojIGEgZnVuY3Rpb24gdGhhdCBhbm5vdGF0ZXMgdGV4dCBhbmQgdGhlbiBjcmVhdGVzIGEgQW5ub3RhdGVkUGxhaW5UZXh0RG9jdW1lbnQKYW5ub3RhdGVfZW50aXRpZXMgPC0gZnVuY3Rpb24oZG9jLCBhbm5vdGF0aW9uX3BpcGVsaW5lKSB7CiAgIyBiZWNhdXNlIEkgd2FzIGdldHRpbmcgZXJyb3JzIHdoZW4gcnVubmluZyB0aGlzIGZ1bmN0aW9uIChpbiBhIGZ1dHVyZSBjb2RlIGNodW5rKQogIGFubm90YXRpb25zIDwtIGFubm90YXRlKGRvYywgYW5ub3RhdGlvbl9waXBlbGluZSkKICBBbm5vdGF0ZWRQbGFpblRleHREb2N1bWVudChkb2MsIGFubm90YXRpb25zKQp9CmBgYAoKYGBge3J9CiMgY3JlYXRlcyBhIGxpc3Qgb2YgdGhlIGRpZmZlcmVudCBhbm5vdGF0b3JzOiB3b3JkLCBzZW50ZW5jZSwgcGVyc29uLCBsb2NhdGlvbiAKaXRpbmVyYW50c19waXBlbGluZSA8LSBsaXN0KAogIE1heGVudF9TZW50X1Rva2VuX0Fubm90YXRvcigpLAogIE1heGVudF9Xb3JkX1Rva2VuX0Fubm90YXRvcigpLAogIE1heGVudF9FbnRpdHlfQW5ub3RhdG9yKGtpbmQgPSAicGVyc29uIiksCiAgTWF4ZW50X0VudGl0eV9Bbm5vdGF0b3Ioa2luZCA9ICJsb2NhdGlvbiIpCikKYGBgCkJlbG93IC0gdGhpcyBkaWQgbm90IHJ1biB1bnRpbCBJIHN3aXRjaGVkIHRvIGEgZGlmZmVyZW50IGxhcHRvcApgYGB7cn0KIyB0aGlzIGlzIHN1cHBvc2UgdG8gdGFrZSB0aGUgbG9uZ2VzdCBiZWNhdXNlIGl0cyBnb2luZyB0aHJvdWdoIDQgYW5ub3RhdG9ycyBmb3IgZWFjaHRleHQgKG9mIHdoaWNoIHRoZXJlIGFyZSAzKQp0ZXh0c19hbm5vdGF0ZWQgPC0gbGl0bGlzdCAlPiUKICBsYXBwbHkoYW5ub3RhdGVfZW50aXRpZXMsIGl0aW5lcmFudHNfcGlwZWxpbmUpCmBgYApzdGFydGVkIGF0IDk6MDgsIGZpbmlzaGVkIGF0IApgYGB7cn0KIyB0aGlzIGNodW5rIGhhZCBzb21lIGVycm9ycyBiYXNlZCBvbiB0aGUgbW9kaWZpY2F0aW9ucyBJJ3ZlIG1hZGUgd2l0aCB0aGUgY29kZSBvbiBteSBjb21wdXRlcgojIHNvIEkgY2hhbmdlZCBpdCBiYWNrCnBsYWNlcyA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gImxvY2F0aW9uIikKCnBlb3BsZSA8LSB0ZXh0c19hbm5vdGF0ZWQgJT4lCiAgbGFwcGx5KGVudGl0aWVzLCBraW5kID0gInBlcnNvbiIpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiBwbGFjZXMgcGVyIHRleHQgZmlsZSAKcGxhY2VzICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiB1bmlxdWUgcGxhY2VzIHBlciB0ZXh0IGZpbGUKcGxhY2VzICU+JQogIGxhcHBseSh1bmlxdWUpICU+JQogIHNhcHBseShsZW5ndGgpCmBgYAoKYGBge3J9CiMgbGlzdHMgdGhlIG51bWJlciBvZiBwZW9wbGUgcGVyIHRleHQgbWVudGlvbmVkCnBlb3BsZSAlPiUKICBzYXBwbHkobGVuZ3RoKQpgYGAKCmBgYHtyfQojIGxpc3RzIHRoZSBudW1iZXIgb2YgdW5pcXVlIHBlb3BsZSBwZXIgdGVzdCBtZW50aW9uZWQKcGVvcGxlICU+JQogIGxhcHBseSh1bmlxdWUpICU+JQogIHNhcHBseShsZW5ndGgpCmBgYA==</div>
 
 
 

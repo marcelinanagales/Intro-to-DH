@@ -5,10 +5,6 @@ output: html_notebook
 # necessary libraries
 ```{r}
 library(dplyr)
-```
-
-
-```{r}
 library(NLP)
 library(openNLP)
 library(RWeka)
@@ -20,8 +16,8 @@ Note: Look into this to better clean up corpus: https://cran.r-project.org/web/p
 # easy function for extracting entities from an Annotated Plain Text Document (we will use this in the next code chunk)
 entities <- function(doc, kind) {
   s <- doc$content
-  # a <- annotations(doc) 
-  a <- annotations(doc)[[1]]
+  a <- annotation(doc) 
+  # a <- annotations(doc)[[1]]
   if(hasArg(kind)) {
     k <- sapply(a$features, `[[`, "kind")
     s[a[k == kind]]
@@ -48,12 +44,13 @@ detective_corpus %$%
 
 ```{r}
 # getting all unique titles
-distinct_title = detective_corpus %>% distinct(title)
-test2 <- as.character(distinct_title)
+titles <- detective_corpus %>% pull(title)
+distinct_title <- unique(titles)
 ```
 
 
 ```{r}
+# DO NOT RUN ~ TRASH
 # names assigning to the list (clean up)
 texts <- detective_corpus
   lapply(paste0, collapse = " ") %>%
@@ -66,15 +63,27 @@ str(texts, max.level = 1)
 
 ```{r}
 # the starting indices for each individual books
-which(detective_corpus$newtext == 0)
+book_indices <- which(detective_corpus$newtext == 0 | is.na(detective_corpus$newtext))
 ```
+
+```{r}
+book_indices <- append(book_indices, (nrow(detective_corpus)+1))
+```
+
 ```{r}
 # make a dataframe (to test) 
 testing <- data.frame(matrix(NA, nrow = length(which(detective_corpus$newtext == 0)), ncol = 2))
 ```
 
 ```{r}
+# TRASH
+litlist <- list(trimws(paste0(detective_corpus$text[43:12621], collapse = " ")), trimws(paste0(detective_corpus$text[12622:17381], collapse = " ")))
+```
 
+
+```{r}
+# TRASH
+testing[1, 1] = distinct_title[1, 1]
 testing[1,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = " "))
 ```
 
@@ -84,7 +93,30 @@ testing[3,2] = trimws(paste0(detective_corpus$text[43:12621], collapse = " "))
 ```
 
 ```{r}
-names(testing) <- basename(distinct_title)
+is.character(detective_corpus$text[1])
+```
+
+```{r}
+for (i in 1:length(distinct_title))
+{
+  litlist[i] <-  trimws(paste0(detective_corpus$text[book_indices[i] : book_indices [i+1]], collapse = " "))
+}
+```
+
+```{r}
+litlist <- litlist %>% lapply(as.String)
+```
+
+```{r}
+# test
+length(distinct_title)
+```
+
+
+```{r}
+names(litlist) <- basename(distinct_title)
+
+str(litlist, max.level = 1)
 ```
 
 
@@ -109,10 +141,10 @@ itinerants_pipeline <- list(
 Below - this did not run until I switched to a different laptop
 ```{r}
 # this is suppose to take the longest because its going through 4 annotators for eachtext (of which there are 3)
-texts_annotated <- texts %>%
+texts_annotated <- litlist %>%
   lapply(annotate_entities, itinerants_pipeline)
 ```
-started at 10:06, finished at 10:23
+started at 9:08, finished at 
 ```{r}
 # this chunk had some errors based on the modifications I've made with the code on my computer
 # so I changed it back
@@ -147,9 +179,4 @@ people %>%
 people %>%
   lapply(unique) %>%
   sapply(length)
-```
-
-```{r}
-# this is for the geocode() function to map out the locations mentioned in the texts
-library(ggmap)
 ```
